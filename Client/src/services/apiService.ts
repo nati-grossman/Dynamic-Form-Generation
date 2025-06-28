@@ -88,10 +88,6 @@ const downloadFile = async (
   try {
     const fullUrl = `${API_CONFIG.baseURL}${url}`;
 
-    if (process.env.NODE_ENV === "development") {
-      console.log(`API Request: GET ${fullUrl}`);
-    }
-
     const response = await fetchWithTimeout(fullUrl);
 
     if (!response.ok) {
@@ -130,7 +126,9 @@ const uploadFile = async <T = any>(
     const formData = new FormData();
     formData.append(fieldName, file);
 
-    const response = await fetchWithTimeout(url, {
+    const fullUrl = `${API_CONFIG.baseURL}${url}`;
+
+    const response = await fetchWithTimeout(fullUrl, {
       method: "POST",
       body: formData,
       // Don't set Content-Type for FormData, browser will set it with boundary
@@ -157,10 +155,6 @@ const apiClient: ApiClient = {
     const fullUrl = `${API_CONFIG.baseURL}${url}`;
     const headers = { ...API_CONFIG.headers, ...config?.headers };
 
-    if (process.env.NODE_ENV === "development") {
-      console.log(`API Request: GET ${fullUrl}`);
-    }
-
     return fetchWithTimeout(fullUrl, {
       method: "GET",
       headers,
@@ -170,10 +164,6 @@ const apiClient: ApiClient = {
   post: async (url: string, data?: any, config?: any) => {
     const fullUrl = `${API_CONFIG.baseURL}${url}`;
     const headers = { ...API_CONFIG.headers, ...config?.headers };
-
-    if (process.env.NODE_ENV === "development") {
-      console.log(`API Request: POST ${fullUrl}`);
-    }
 
     return fetchWithTimeout(fullUrl, {
       method: "POST",
@@ -186,10 +176,6 @@ const apiClient: ApiClient = {
     const fullUrl = `${API_CONFIG.baseURL}${url}`;
     const headers = { ...API_CONFIG.headers, ...config?.headers };
 
-    if (process.env.NODE_ENV === "development") {
-      console.log(`API Request: PUT ${fullUrl}`);
-    }
-
     return fetchWithTimeout(fullUrl, {
       method: "PUT",
       headers,
@@ -200,10 +186,6 @@ const apiClient: ApiClient = {
   delete: async (url: string, config?: any) => {
     const fullUrl = `${API_CONFIG.baseURL}${url}`;
     const headers = { ...API_CONFIG.headers, ...config?.headers };
-
-    if (process.env.NODE_ENV === "development") {
-      console.log(`API Request: DELETE ${fullUrl}`);
-    }
 
     return fetchWithTimeout(fullUrl, {
       method: "DELETE",

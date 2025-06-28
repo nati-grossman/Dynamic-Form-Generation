@@ -33,7 +33,6 @@ export const FieldRenderer: React.FC<FieldRendererProps> = (props) => {
     case "dropdown":
       return <SelectFieldRenderer {...props} />;
     default:
-      console.warn(`Unsupported field type: ${field.type}`);
       return null;
   }
 };

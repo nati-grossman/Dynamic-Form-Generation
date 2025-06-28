@@ -12,15 +12,14 @@ async def lifespan(app: FastAPI):
     # Startup
     try:
         create_tables()
-        print("Database tables created successfully")
     except Exception as e:
-        print(f"Warning: Could not create database tables: {e}")
-        print("Server will run without database functionality")
+        # Server will run without database functionality
+        pass
     
     yield
     
     # Shutdown
-    print("Shutting down server...")
+    pass
 
 app = FastAPI(
     title="Dynamic Form Generator API",

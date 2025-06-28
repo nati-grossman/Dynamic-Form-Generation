@@ -31,11 +31,12 @@ export const downloadExample = async (): Promise<{ success: boolean }> => {
  */
 export const uploadSchema = async (
   file: File
-): Promise<ApiResponse<{ form_id: string; schema: FormSchema }>> => {
-  return await uploadFile<ApiResponse<{ form_id: string; schema: FormSchema }>>(
-    "/forms/upload-schema",
-    file
-  );
+): Promise<{ message: string; form_id: string; schema: FormSchema }> => {
+  return await uploadFile<{
+    message: string;
+    form_id: string;
+    schema: FormSchema;
+  }>("/forms/upload-schema", file);
 };
 
 /**

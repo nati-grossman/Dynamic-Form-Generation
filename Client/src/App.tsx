@@ -56,8 +56,6 @@ const AppContent: React.FC = () => {
       // Handle schema
       if (currentSchema.status === "fulfilled") {
         setSchema(currentSchema.value);
-      } else {
-        console.log("No current schema loaded");
       }
 
       // Handle submissions
@@ -110,18 +108,11 @@ const AppContent: React.FC = () => {
   };
 
   const handleSchemaUploaded = async (newSchema: any): Promise<void> => {
-    try {
-      // Load the schema from server to ensure consistency
-      const loadedSchema = await getCurrentSchema();
-      setSchema(loadedSchema);
-    } catch (error: any) {
-      // If loading from server fails, use the schema from upload response
-      setSchema(newSchema);
-      console.warn(
-        "Failed to load schema from server, using upload response:",
-        error
-      );
-    }
+    // Use the schema from upload response immediately for better UX
+    setSchema(newSchema);
+
+    // Force a small delay to ensure state update is processed
+    await new Promise((resolve) => setTimeout(resolve, 100));
   };
 
   return (

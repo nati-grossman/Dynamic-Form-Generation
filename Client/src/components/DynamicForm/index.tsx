@@ -51,12 +51,14 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
     }
   };
 
+  const initialValues =
+    schema?.fields.reduce((acc: Record<string, any>, field) => {
+      acc[field.name] = getInitialValueForField(field);
+      return acc;
+    }, {}) || {};
+
   const formik = useFormik({
-    initialValues:
-      schema?.fields.reduce((acc: Record<string, any>, field) => {
-        acc[field.name] = getInitialValueForField(field);
-        return acc;
-      }, {}) || {},
+    initialValues,
     validationSchema,
     enableReinitialize: true, // This allows Formik to reinitialize when initialValues change
     onSubmit: async (values) => {
@@ -69,7 +71,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
           setFormErrors(result.errors || {});
         }
       } catch (error) {
-        console.error("Form submission error:", error);
+        // Handle form submission errors silently
       }
     },
   });

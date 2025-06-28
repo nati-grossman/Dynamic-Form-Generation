@@ -112,15 +112,12 @@ class FormService:
     
     def submit_form_data(self, submission_data: dict, db: Session) -> FormSubmissionResponse:
         """Submit and validate form data"""
-        print("===> [DEBUG] קיבלתי נתוני טופס:", submission_data)
         if self.current_form_schema is None or self.current_dynamic_model is None:
-            print("===> [DEBUG] אין סכמת טופס או מודל דינמי בזיכרון!")
             raise HTTPException(status_code=404, detail="No form schema loaded")
         
         try:
             # Validate submission using Pydantic dynamic model
             validated_data = self.current_dynamic_model(**submission_data)
-            print("===> [DEBUG] נתונים עברו וולידציה:", validated_data)
             
             # Save to database
             db_submission = FormSubmissionDB(
@@ -132,7 +129,6 @@ class FormService:
             )
             db.add(db_submission)
             db.commit()
-            print("===> [DEBUG] הנתונים נשמרו בהצלחה בבסיס הנתונים.")
             
             return FormSubmissionResponse(
                 success=True,
@@ -140,7 +136,6 @@ class FormService:
             )
         
         except ValidationError as e:
-            print("===> [DEBUG] שגיאת ולידציה:", e)
             # Convert Pydantic validation errors to our format
             errors = {}
             for error in e.errors():
@@ -150,7 +145,6 @@ class FormService:
                 if field_name not in errors:
                     errors[field_name] = []
                 errors[field_name].append(error_message)
-            print("===> [DEBUG] פירוט שגיאות ולידציה:", errors)
             return FormSubmissionResponse(
                 success=False,
                 errors=errors,
@@ -158,7 +152,6 @@ class FormService:
             )
         
         except Exception as e:
-            print("===> [DEBUG] שגיאה כללית:", e)
             return FormSubmissionResponse(
                 success=False,
                 errors={"general": [str(e)]},

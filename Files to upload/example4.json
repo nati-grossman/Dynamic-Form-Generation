@@ -20,7 +20,7 @@
     {
       "name": "serviceType",
       "label": "סוג השירות",
-      "type": "select",
+      "type": "dropdown",
       "required": true,
       "options": [
         { "value": "consultation", "label": "ייעוץ" },
@@ -32,7 +32,7 @@
     {
       "name": "overallSatisfaction",
       "label": "שביעות רצון כללית",
-      "type": "select",
+      "type": "dropdown",
       "required": true,
       "options": [
         { "value": "1", "label": "לא מרוצה כלל" },
@@ -43,29 +43,9 @@
       ]
     },
     {
-      "name": "aspects",
-      "label": "היבטים חיוביים",
-      "type": "checkbox",
-      "options": [
-        { "value": "speed", "label": "מהירות השירות" },
-        { "value": "quality", "label": "איכות השירות" },
-        { "value": "professionalism", "label": "מקצועיות" },
-        { "value": "communication", "label": "תקשורת" },
-        { "value": "price", "label": "מחיר הוגן" }
-      ]
-    },
-    {
-      "name": "improvements",
-      "label": "הצעות לשיפור",
-      "type": "textarea",
-      "validation": {
-        "maxLength": 300
-      }
-    },
-    {
       "name": "recommend",
       "label": "האם תמליץ עלינו לאחרים?",
-      "type": "select",
+      "type": "dropdown",
       "required": true,
       "options": [
         { "value": "definitely", "label": "בהחלט כן" },
@@ -74,12 +54,6 @@
         { "value": "probably_not", "label": "כנראה לא" },
         { "value": "definitely_not", "label": "בהחלט לא" }
       ]
-    },
-    {
-      "name": "contactBack",
-      "label": "ניתן ליצור איתי קשר לבירור נוסף",
-      "type": "checkbox",
-      "options": [{ "value": "yes", "label": "כן, ניתן ליצור איתי קשר" }]
     }
   ]
 }

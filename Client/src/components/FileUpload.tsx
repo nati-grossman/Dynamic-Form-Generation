@@ -53,16 +53,13 @@ const FileUpload: React.FC<FileUploadProps> = ({ onSchemaUploaded }) => {
     try {
       setLoading(true);
       const result = await uploadSchema(file);
-      displayMessage(result.message, "success");
+      displayMessage(result.message || "הקובץ הועלה בהצלחה", "success");
 
-      // Update schema immediately in store for instant UI update
-      if (result.data?.schema) {
-        setSchema(result.data.schema);
-      }
-
-      // Also call parent callback if provided
-      if (onSchemaUploaded && result.data?.schema) {
-        await onSchemaUploaded(result.data.schema);
+      // Call parent callback if provided, otherwise set schema directly
+      if (onSchemaUploaded && result.schema) {
+        await onSchemaUploaded(result.schema);
+      } else if (result.schema) {
+        setSchema(result.schema);
       }
     } catch (error: any) {
       displayMessage(error.message, "error");
