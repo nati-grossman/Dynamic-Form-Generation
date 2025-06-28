@@ -133,13 +133,13 @@ CREATE USER postgres WITH PASSWORD 'password';
 GRANT ALL PRIVILEGES ON DATABASE dynamic_forms TO postgres;
 ```
 
-### 2. הגדרת משתני סביבה
+### 2. הגדרת משתני סביבה (אופציונלי)
 
-צור קובץ `.env` בתיקיית `Server/`:
+ניתן ליצור קובץ `.env` בתיקיית `Server/` לעריכת הגדרות ברירת המחדל:
 
 ```env
 # Database Configuration
-DATABASE_URL=postgresql://postgres:password@localhost/dynamic_forms
+DATABASE_URL=postgresql+psycopg://postgres:password@localhost/dynamic_forms
 
 # Server Configuration
 HOST=0.0.0.0
@@ -148,20 +148,9 @@ DEBUG=true
 
 # CORS Configuration
 ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
-
-# Security
-SECRET_KEY=your-secret-key-here-change-in-production
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-
-# File Upload
-MAX_FILE_SIZE=10485760
-UPLOAD_DIR=uploads
-
-# Logging
-LOG_LEVEL=INFO
-LOG_FILE=logs/app.log
 ```
+
+**הערה**: כל המשתנים הם אופציונליים ויש להם ערכי ברירת מחדל מתאימים לפיתוח.
 
 ### 3. הפעלת השרת
 
@@ -259,12 +248,6 @@ npm start
 - `GET /submissions/` - קבלת כל הטפסים שהוגשו
 - `DELETE /submissions/` - מחיקת כל הטפסים
 
-### כללי
-
-- `GET /` - מידע על ה-API
-- `GET /health` - בדיקת בריאות המערכת
-- `GET /docs` - תיעוד Swagger
-
 ## טכנולוגיות
 
 ### שרת
@@ -281,7 +264,7 @@ npm start
 - **React**: ספריית UI
 - **Material UI**: רכיבי UI מודרניים
 - **Formik + Yup**: ניהול טפסים ווולידציה
-- **Axios**: תקשורת HTTP עם השרת
+- **Fetch API**: תקשורת HTTP נטיבית עם השרת
 
 ### תקשורת
 
@@ -314,17 +297,6 @@ pytest tests/test_pydantic_validation.py  # הרצת טסטים ספציפיים
 pytest tests/test_pydantic_validation.py::TestPydanticValidation::test_text_field_validation  # הרצת טסט ספציפי
 ```
 
-## פיתוח עתידי
-
-- [ ] תמיכה בסוגי שדות נוספים (checkbox, radio, file upload)
-- [ ] תמיכה בטפסים מרובי עמודים
-- [ ] מערכת הרשאות משתמשים
-- [ ] ייצוא נתונים ל-Excel/PDF
-- [ ] תמיכה בתבניות טפסים מוכנות
-- [ ] מערכת התראות בזמן אמת
-- [ ] לוגים מתקדמים
-- [ ] מערכת ניטור ביצועים
-
 ## ארכיטקטורת המערכת
 
 ### שרת (Backend)
@@ -341,7 +313,7 @@ pytest tests/test_pydantic_validation.py::TestPydanticValidation::test_text_fiel
 - **React**: ספריית UI
 - **Material UI**: רכיבי UI מודרניים
 - **Formik + Yup**: ניהול טפסים ווולידציה
-- **Axios**: תקשורת HTTP עם השרת
+- **Fetch API**: תקשורת HTTP נטיבית עם השרת
 
 ### תקשורת
 
