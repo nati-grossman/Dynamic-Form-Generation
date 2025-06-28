@@ -13,11 +13,12 @@ import { Container, Typography, Grid } from "@mui/material";
 
 // Context and Services
 import { AppProvider, useAppContext } from "./store";
-import { getCurrentSchema, submitForm } from "./services/formService";
+import { submitForm } from "./services/formService";
 import {
   getSubmissions,
   deleteAllSubmissions,
 } from "./services/submissionService";
+import { useInitialData } from "./hooks/useInitialData";
 
 // Components
 import FileUpload from "./components/FileUpload";
@@ -38,38 +39,12 @@ const AppContent: React.FC = () => {
     clearSubmissions,
   } = useAppContext();
 
-  // Load initial data
+  const { loadInitialData } = useInitialData();
+
+  // Load initial data on component mount
   useEffect(() => {
     loadInitialData();
-  }, []);
-
-  const loadInitialData = async (): Promise<void> => {
-    try {
-      setLoading(true);
-
-      // Load current schema and submissions in parallel
-      const [currentSchema, submissionsData] = await Promise.allSettled([
-        getCurrentSchema(),
-        getSubmissions(),
-      ]);
-
-      // Handle schema
-      if (currentSchema.status === "fulfilled") {
-        setSchema(currentSchema.value);
-      }
-
-      // Handle submissions
-      if (submissionsData.status === "fulfilled") {
-        setSubmissions(submissionsData.value);
-      } else {
-        displayMessage("שגיאה בטעינת הטפסים שהוגשו", "error");
-      }
-    } catch (error: any) {
-      displayMessage("שגיאה בטעינת הנתונים", "error");
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [loadInitialData]);
 
   const handleFormSubmit = async (formData: Record<string, any>) => {
     try {
