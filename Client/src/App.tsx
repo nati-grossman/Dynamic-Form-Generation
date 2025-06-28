@@ -14,11 +14,8 @@ import { Container, Typography, Grid } from "@mui/material";
 // Context and Services
 import { AppProvider, useAppContext } from "./store";
 import { submitForm } from "./services/formService";
-import {
-  getSubmissions,
-  deleteAllSubmissions,
-} from "./services/submissionService";
 import { useInitialData } from "./hooks/useInitialData";
+import { useSubmissions } from "./hooks/useSubmissions";
 
 // Components
 import FileUpload from "./components/FileUpload";
@@ -28,23 +25,18 @@ import MessageDisplay from "./components/MessageDisplay";
 
 // Main App Content
 const AppContent: React.FC = () => {
-  const {
-    schema,
-    submissions,
-    loading,
-    setSchema,
-    setSubmissions,
-    setLoading,
-    displayMessage,
-    clearSubmissions,
-  } = useAppContext();
+  const { schema, loading, setSchema, setLoading, displayMessage } =
+    useAppContext();
 
   const { loadInitialData } = useInitialData();
+  const { submissions, refreshSubmissions, handleDeleteAllSubmissions } =
+    useSubmissions();
 
   // Load initial data on component mount
   useEffect(() => {
     loadInitialData();
-  }, [loadInitialData]);
+    refreshSubmissions(); // Load submissions separately
+  }, [loadInitialData, refreshSubmissions]);
 
   const handleFormSubmit = async (formData: Record<string, any>) => {
     try {
@@ -55,9 +47,8 @@ const AppContent: React.FC = () => {
 
       if (result.success) {
         displayMessage(result.message, "success");
-        // Reload submissions
-        const updatedSubmissions = await getSubmissions();
-        setSubmissions(updatedSubmissions);
+        // Refresh submissions after successful submit
+        await refreshSubmissions(true); // Force refresh
         return result;
       } else {
         displayMessage(result.message, "error");
@@ -66,19 +57,6 @@ const AppContent: React.FC = () => {
     } catch (error: any) {
       displayMessage(error.message, "error");
       return { success: false, errors: {}, message: error.message || "שגיאה" };
-    }
-  };
-
-  const handleDeleteAllSubmissions = async (): Promise<void> => {
-    try {
-      setLoading(true);
-      await deleteAllSubmissions();
-      clearSubmissions();
-      displayMessage("כל הטפסים נמחקו בהצלחה", "success");
-    } catch (error: any) {
-      displayMessage(error.message, "error");
-    } finally {
-      setLoading(false);
     }
   };
 

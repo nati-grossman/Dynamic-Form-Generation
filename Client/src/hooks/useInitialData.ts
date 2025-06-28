@@ -5,39 +5,23 @@
 import { useCallback } from "react";
 import { useAppContext } from "../store";
 import { getCurrentSchema } from "../services/formService";
-import { getSubmissions } from "../services/submissionService";
 
 export const useInitialData = () => {
-  const { setSchema, setSubmissions, setLoading, displayMessage } =
-    useAppContext();
+  const { setSchema, setLoading, displayMessage } = useAppContext();
 
   const loadInitialData = useCallback(async (): Promise<void> => {
     try {
       setLoading(true);
 
-      // Load current schema and submissions in parallel
-      const [currentSchema, submissionsData] = await Promise.allSettled([
-        getCurrentSchema(),
-        getSubmissions(),
-      ]);
-
-      // Handle schema
-      if (currentSchema.status === "fulfilled") {
-        setSchema(currentSchema.value);
-      }
-
-      // Handle submissions
-      if (submissionsData.status === "fulfilled") {
-        setSubmissions(submissionsData.value);
-      } else {
-        displayMessage("שגיאה בטעינת הטפסים שהוגשו", "error");
-      }
+      // Load current schema only (submissions will be loaded by useSubmissions)
+      const currentSchema = await getCurrentSchema();
+      setSchema(currentSchema);
     } catch (error: any) {
-      displayMessage("שגיאה בטעינת הנתונים", "error");
+      // Schema loading is optional - app can work without it
     } finally {
       setLoading(false);
     }
-  }, [setLoading, setSchema, setSubmissions, displayMessage]);
+  }, [setLoading, setSchema, displayMessage]);
 
   return { loadInitialData };
 };

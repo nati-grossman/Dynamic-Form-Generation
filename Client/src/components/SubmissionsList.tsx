@@ -7,7 +7,7 @@
  * - Loading state
  */
 
-import React from "react";
+import React, { memo } from "react";
 import {
   Paper,
   Typography,
@@ -24,14 +24,14 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { SubmissionsListProps } from "../types";
-import { useAppState } from "../store";
+import { useAppContext } from "../store";
 
 const SubmissionsList: React.FC<SubmissionsListProps> = ({
   submissions,
   onDeleteAll,
   loading,
 }) => {
-  const { schema } = useAppState();
+  const { schema } = useAppContext();
 
   const formatDate = (dateString: string) => {
     if (!dateString) return "---";
@@ -69,7 +69,7 @@ const SubmissionsList: React.FC<SubmissionsListProps> = ({
       const found = fieldsMapping.find((f) => f.name === name);
       if (found) return found.label;
     }
-    return schema?.fields.find((f) => f.name === name)?.label || name;
+    return schema?.fields.find((f: any) => f.name === name)?.label || name;
   };
 
   const renderSubmissionData = (
@@ -174,4 +174,4 @@ const SubmissionsList: React.FC<SubmissionsListProps> = ({
   );
 };
 
-export default SubmissionsList;
+export default memo(SubmissionsList);

@@ -7,7 +7,7 @@ from pydantic import ValidationError
 from sqlalchemy.orm import Session
 
 from models import FormSchema, FormSubmission, FormSubmissionResponse, DynamicFormSubmissionGenerator
-from database import FormSubmissionDB, generate_data_hash
+from database import FormSubmissionDB, generate_data_hash, check_duplicate_submission
 
 class FormService:
     """Service class for form-related business logic"""
@@ -118,6 +118,14 @@ class FormService:
         try:
             # Validate submission using Pydantic dynamic model
             validated_data = self.current_dynamic_model(**submission_data)
+            
+            # Check for duplicate submission
+            if check_duplicate_submission(validated_data.dict(), db):
+                return FormSubmissionResponse(
+                    success=False,
+                    errors={"general": ["טופס זהה כבר הוגש קודם לכן"]},
+                    message="טופס זהה כבר הוגש קודם לכן"
+                )
             
             # Save to database
             db_submission = FormSubmissionDB(
