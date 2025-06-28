@@ -25,6 +25,11 @@
 
 ```
 Dynamic Form Generation/
+├── README.md                   # תיעוד הפרויקט
+├── .gitignore                  # קבצים להתעלמות ב-Git
+├── start.bat                   # הפעלה מהירה ב-Windows
+├── start.sh                    # הפעלה מהירה ב-Linux/Mac
+│
 ├── Server/                     # שרת Python עם FastAPI
 │   ├── main.py                # הקובץ הראשי של השרת
 │   ├── config.py              # הגדרות ומשתני סביבה
@@ -32,32 +37,84 @@ Dynamic Form Generation/
 │   ├── database.py            # הגדרות מסד נתונים
 │   ├── requirements.txt       # תלויות Python
 │   ├── pytest.ini            # הגדרות טסטים
-│   ├── routers/              # קונטולרים
+│   │
+│   ├── routers/               # קונטולרים (API Routes)
 │   │   ├── forms.py          # קונטולר טפסים
 │   │   └── submissions.py    # קונטולר הגשות
-│   ├── services/             # שכבת שירותים
+│   │
+│   ├── services/              # שכבת שירותים
+│   │   ├── __init__.py       # ייצוא שירותים
 │   │   ├── form_service.py   # שירות לטפסים
 │   │   └── submission_service.py # שירות להגשות
-│   ├── models/               # מודלים Pydantic מפוצלים
+│   │
+│   ├── models/                # מודלים Pydantic מפוצלים
 │   │   ├── __init__.py       # ייצוא כל המודלים
 │   │   ├── base.py           # מודלים בסיסיים
 │   │   ├── form_field.py     # מודל שדה טופס
 │   │   ├── form_schema.py    # מודל סכמת טופס
 │   │   ├── submission.py     # מודל הגשה
 │   │   └── dynamic_validator.py # מחולל מודלים דינמיים
-│   └── tests/                # טסטים
-│       └── test_pydantic_validation.py # בדיקות וולידציה
-├── Client/                    # לקוח React
-│   ├── src/
-│   │   ├── App.js            # קומפוננטה ראשית
-│   │   ├── api.js            # תקשורת עם השרת
-│   │   └── components/       # קומפוננטות
-│   │       ├── DynamicForm.js
-│   │       └── SubmissionsList.js
-│   └── package.json          # תלויות Node.js
-└── Files to upload/          # קבצי דוגמה
-    ├── example1.json
-    └── example2.json
+│   │
+│   ├── files/                 # קבצי מערכת
+│   │   ├── example_file/      # קבצי דוגמה
+│   │   │   └── example1.json  # קובץ דוגמה להורדה
+│   │   └── user_file/         # קבצי משתמש
+│   │       └── current_form.json # הסכמה הנוכחית
+│   │
+│   └── tests/                 # טסטים
+│       ├── test_pydantic_validation.py # בדיקות וולידציה
+│       └── test_submissions.py # בדיקות הגשות
+│
+├── Client/                    # אפליקציית React עם TypeScript
+│   ├── package.json          # תלויות Node.js
+│   ├── package-lock.json     # נעילת גרסאות
+│   ├── tsconfig.json         # הגדרות TypeScript
+│   │
+│   ├── public/               # קבצים סטטיים
+│   │   ├── index.html        # HTML ראשי
+│   │   └── manifest.json     # מניפסט אפליקציה
+│   │
+│   └── src/                  # קוד מקור
+│       ├── index.tsx         # נקודת כניסה לאפליקציה
+│       ├── App.tsx           # קומפוננטה ראשית
+│       │
+│       ├── components/       # רכיבי React
+│       │   ├── DynamicForm/  # רכיב הטופס הדינמי
+│       │   │   ├── index.tsx # רכיב ראשי של הטופס
+│       │   │   ├── fieldRenderer.tsx # רנדרר שדות ראשי
+│       │   │   ├── types.ts  # טיפוסים ספציפיים
+│       │   │   ├── validation.ts # לוגיקת וולידציה
+│       │   │   └── renderers/ # רנדרים נפרדים לכל סוג שדה
+│       │   │       ├── index.ts # ייצוא רנדרים
+│       │   │       ├── TextFieldRenderer.tsx
+│       │   │       ├── DateFieldRenderer.tsx
+│       │   │       ├── NumberFieldRenderer.tsx
+│       │   │       └── SelectFieldRenderer.tsx
+│       │   ├── FileUpload.tsx # רכיב העלאת קבצים
+│       │   ├── MessageDisplay.tsx # רכיב הודעות
+│       │   └── SubmissionsList.tsx # רכיב רשימת הגשות
+│       │
+│       ├── services/         # שירותי API
+│       │   ├── index.ts      # ייצוא שירותים
+│       │   ├── apiService.ts # שירות API בסיסי
+│       │   ├── formService.ts # שירות טפסים
+│       │   └── submissionService.ts # שירות הגשות
+│       │
+│       ├── store/            # ניהול מצב אפליקציה
+│       │   ├── index.ts      # ייצוא store
+│       │   ├── context.tsx   # React Context
+│       │   ├── hooks.ts      # hooks מותאמים
+│       │   ├── actions.ts    # פעולות store
+│       │   └── reducer.ts    # reducer לעדכון מצב
+│       │
+│       └── types/            # הגדרות טיפוסים
+│           └── index.ts      # טיפוסים גלובליים
+│
+└── Files to upload/          # קבצי דוגמה להעלאה
+    ├── example1.json         # דוגמה 1: טופס רישום בסיסי
+    ├── example2.json         # דוגמה 2: טופס יצירת קשר
+    ├── example3.json         # דוגמה 3: טופס רישום לקורס
+    └── example4.json         # דוגמה 4: סקר שביעות רצון
 ```
 
 ## התקנה והפעלה
