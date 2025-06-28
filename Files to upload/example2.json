@@ -1,0 +1,63 @@
+{
+  "title": "טופס הרשמה לאירוע",
+  "fields": [
+    {
+      "name": "fullName",
+      "label": "שם מלא",
+      "type": "text",
+      "required": true,
+      "validation": {
+        "minLength": 2,
+        "maxLength": 50
+      },
+      "errorMessages": {
+        "required": "נא להזין את שמך המלא",
+        "minLength": "השם קצר מדי (לפחות 2 תווים)",
+        "maxLength": "השם ארוך מדי (מקסימום 50 תווים)"
+      }
+    },
+    {
+      "name": "email",
+      "label": "אימייל ליצירת קשר",
+      "type": "email",
+      "required": true,
+      "validation": {
+        "email": true
+      },
+      "errorMessages": {
+        "required": "נא להזין כתובת אימייל",
+        "email": "הפורמט של האימייל אינו תקין"
+      }
+    },
+    {
+      "name": "eventDate",
+      "label": "תאריך האירוע",
+      "type": "date",
+      "required": true,
+      "validation": {
+        "minDate": "2024-01-01",
+        "maxDate": "2026-12-31"
+      },
+      "errorMessages": {
+        "required": "נא להזין תאריך",
+        "minDate": "תאריך מוקדם מדי",
+        "maxDate": "תאריך מאוחר מדי"
+      }
+    },
+    {
+      "name": "eventType",
+      "label": "סוג האירוע",
+      "type": "dropdown",
+      "required": false,
+      "options": [
+        { "value": "conference", "label": "כנס" },
+        { "value": "workshop", "label": "סדנה" },
+        { "value": "webinar", "label": "וובינר" },
+        { "value": "other", "label": "אחר" }
+      ],
+      "errorMessages": {
+        "invalidOption": "סוג האירוע שבחרת אינו תקף"
+      }
+    }
+  ]
+}

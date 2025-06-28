@@ -1,0 +1,69 @@
+{
+  "title": "רישום לקורס פיתוח",
+  "fields": [
+    {
+      "name": "fullName",
+      "label": "שם מלא",
+      "type": "text",
+      "required": true,
+      "validation": {
+        "minLength": 2,
+        "maxLength": 50
+      }
+    },
+    {
+      "name": "email",
+      "label": "כתובת אימייל",
+      "type": "email",
+      "required": true
+    },
+    {
+      "name": "phone",
+      "label": "מספר טלפון",
+      "type": "tel",
+      "required": true,
+      "validation": {
+        "pattern": "^[0-9]{10}$"
+      }
+    },
+    {
+      "name": "experience",
+      "label": "רמת ניסיון",
+      "type": "select",
+      "required": true,
+      "options": [
+        { "value": "beginner", "label": "מתחיל" },
+        { "value": "intermediate", "label": "בינוני" },
+        { "value": "advanced", "label": "מתקדם" }
+      ]
+    },
+    {
+      "name": "languages",
+      "label": "שפות תכנות מוכרות",
+      "type": "checkbox",
+      "options": [
+        { "value": "javascript", "label": "JavaScript" },
+        { "value": "python", "label": "Python" },
+        { "value": "java", "label": "Java" },
+        { "value": "csharp", "label": "C#" },
+        { "value": "cpp", "label": "C++" }
+      ]
+    },
+    {
+      "name": "motivation",
+      "label": "מה מניע אותך ללמוד?",
+      "type": "textarea",
+      "required": true,
+      "validation": {
+        "minLength": 20,
+        "maxLength": 500
+      }
+    },
+    {
+      "name": "newsletter",
+      "label": "אני מעוניין לקבל עדכונים",
+      "type": "checkbox",
+      "options": [{ "value": "yes", "label": "כן, אני מעוניין לקבל עדכונים" }]
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "title": "סקר שביעות רצון",
+  "fields": [
+    {
+      "name": "customerName",
+      "label": "שם הלקוח",
+      "type": "text",
+      "required": true,
+      "validation": {
+        "minLength": 2,
+        "maxLength": 30
+      }
+    },
+    {
+      "name": "serviceDate",
+      "label": "תאריך השירות",
+      "type": "date",
+      "required": true
+    },
+    {
+      "name": "serviceType",
+      "label": "סוג השירות",
+      "type": "select",
+      "required": true,
+      "options": [
+        { "value": "consultation", "label": "ייעוץ" },
+        { "value": "installation", "label": "התקנה" },
+        { "value": "maintenance", "label": "תחזוקה" },
+        { "value": "repair", "label": "תיקון" }
+      ]
+    },
+    {
+      "name": "overallSatisfaction",
+      "label": "שביעות רצון כללית",
+      "type": "select",
+      "required": true,
+      "options": [
+        { "value": "1", "label": "לא מרוצה כלל" },
+        { "value": "2", "label": "לא מרוצה" },
+        { "value": "3", "label": "בסדר" },
+        { "value": "4", "label": "מרוצה" },
+        { "value": "5", "label": "מרוצה מאוד" }
+      ]
+    },
+    {
+      "name": "aspects",
+      "label": "היבטים חיוביים",
+      "type": "checkbox",
+      "options": [
+        { "value": "speed", "label": "מהירות השירות" },
+        { "value": "quality", "label": "איכות השירות" },
+        { "value": "professionalism", "label": "מקצועיות" },
+        { "value": "communication", "label": "תקשורת" },
+        { "value": "price", "label": "מחיר הוגן" }
+      ]
+    },
+    {
+      "name": "improvements",
+      "label": "הצעות לשיפור",
+      "type": "textarea",
+      "validation": {
+        "maxLength": 300
+      }
+    },
+    {
+      "name": "recommend",
+      "label": "האם תמליץ עלינו לאחרים?",
+      "type": "select",
+      "required": true,
+      "options": [
+        { "value": "definitely", "label": "בהחלט כן" },
+        { "value": "probably", "label": "כנראה כן" },
+        { "value": "maybe", "label": "אולי" },
+        { "value": "probably_not", "label": "כנראה לא" },
+        { "value": "definitely_not", "label": "בהחלט לא" }
+      ]
+    },
+    {
+      "name": "contactBack",
+      "label": "ניתן ליצור איתי קשר לבירור נוסף",
+      "type": "checkbox",
+      "options": [{ "value": "yes", "label": "כן, ניתן ליצור איתי קשר" }]
+    }
+  ]
+}

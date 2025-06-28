@@ -1,0 +1,94 @@
+{
+  "title": "טופס הזמנת מוצרים",
+  "fields": [
+    {
+      "name": "customerName",
+      "label": "שם הלקוח",
+      "type": "text",
+      "required": true,
+      "validation": {
+        "minLength": 3,
+        "maxLength": 100
+      },
+      "errorMessages": {
+        "required": "נא להזין את שם הלקוח",
+        "minLength": "השם צריך להכיל לפחות 3 תווים",
+        "maxLength": "השם לא יכול להכיל יותר מ-100 תווים"
+      }
+    },
+    {
+      "name": "customerEmail",
+      "label": "כתובת אימייל",
+      "type": "email",
+      "required": true,
+      "validation": {
+        "email": true
+      },
+      "errorMessages": {
+        "required": "נא להזין כתובת אימייל",
+        "email": "כתובת אימייל לא תקינה"
+      }
+    },
+    {
+      "name": "orderDate",
+      "label": "תאריך הזמנה",
+      "type": "date",
+      "required": true,
+      "validation": {
+        "minDate": "2020-01-01",
+        "maxDate": "2025-06-27"
+      },
+      "errorMessages": {
+        "required": "נא להזין תאריך",
+        "minDate": "התאריך מוקדם מדי",
+        "maxDate": "התאריך מאוחר מדי"
+      }
+    },
+    {
+      "name": "quantity",
+      "label": "כמות מוצרים",
+      "type": "number",
+      "required": true,
+      "validation": {
+        "min": 1,
+        "max": 1000
+      },
+      "errorMessages": {
+        "required": "נא להזין כמות מוצרים",
+        "min": "כמות המוצרים צריכה להיות לפחות 1",
+        "max": "כמות המוצרים לא יכולה לעלות על 1000"
+      }
+    },
+    {
+      "name": "productType",
+      "label": "סוג מוצר",
+      "type": "dropdown",
+      "required": true,
+      "options": [
+        { "value": "electronics", "label": "אלקטרוניקה" },
+        { "value": "clothing", "label": "ביגוד" },
+        { "value": "books", "label": "ספרים" },
+        { "value": "home", "label": "בית וגן" },
+        { "value": "sports", "label": "ספורט" }
+      ],
+      "errorMessages": {
+        "required": "יש לבחור סוג מוצר"
+      }
+    },
+    {
+      "name": "accessCode",
+      "label": "קוד גישה",
+      "type": "password",
+      "required": true,
+      "validation": {
+        "minLength": 6,
+        "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$"
+      },
+      "errorMessages": {
+        "required": "יש להזין קוד גישה",
+        "minLength": "קוד הגישה חייב להכיל לפחות 6 תווים",
+        "pattern": "הקוד חייב להכיל אות קטנה, אות גדולה וספרה אחת לפחות"
+      }
+    }
+  ]
+}
