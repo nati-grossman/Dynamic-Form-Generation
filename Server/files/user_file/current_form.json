@@ -1,24 +1,24 @@
 {
-  "title": "טופס הזמנת מוצרים",
+  "title": "טופס הרשמה לאירוע",
   "fields": [
     {
-      "name": "customerName",
-      "label": "שם הלקוח",
+      "name": "fullName",
+      "label": "שם מלא",
       "type": "text",
       "required": true,
       "validation": {
-        "minLength": 3,
-        "maxLength": 100
+        "minLength": 2,
+        "maxLength": 50
       },
       "errorMessages": {
-        "required": "נא להזין את שם הלקוח",
-        "minLength": "השם צריך להכיל לפחות 3 תווים",
-        "maxLength": "השם לא יכול להכיל יותר מ-100 תווים"
+        "required": "נא להזין את שמך המלא",
+        "minLength": "השם קצר מדי (לפחות 2 תווים)",
+        "maxLength": "השם ארוך מדי (מקסימום 50 תווים)"
       }
     },
     {
-      "name": "customerEmail",
-      "label": "כתובת אימייל",
+      "name": "email",
+      "label": "אימייל ליצירת קשר",
       "type": "email",
       "required": true,
       "validation": {
@@ -26,68 +26,37 @@
       },
       "errorMessages": {
         "required": "נא להזין כתובת אימייל",
-        "email": "כתובת אימייל לא תקינה"
+        "email": "הפורמט של האימייל אינו תקין"
       }
     },
     {
-      "name": "orderDate",
-      "label": "תאריך הזמנה",
+      "name": "eventDate",
+      "label": "תאריך האירוע",
       "type": "date",
       "required": true,
       "validation": {
-        "minDate": "2020-01-01",
-        "maxDate": "2025-06-27"
+        "minDate": "2024-01-01",
+        "maxDate": "2026-12-31"
       },
       "errorMessages": {
         "required": "נא להזין תאריך",
-        "minDate": "התאריך מוקדם מדי",
-        "maxDate": "התאריך מאוחר מדי"
+        "minDate": "תאריך מוקדם מדי",
+        "maxDate": "תאריך מאוחר מדי"
       }
     },
     {
-      "name": "quantity",
-      "label": "כמות מוצרים",
-      "type": "number",
-      "required": true,
-      "validation": {
-        "min": 1,
-        "max": 1000
-      },
-      "errorMessages": {
-        "required": "נא להזין כמות מוצרים",
-        "min": "כמות המוצרים צריכה להיות לפחות 1",
-        "max": "כמות המוצרים לא יכולה לעלות על 1000"
-      }
-    },
-    {
-      "name": "productType",
-      "label": "סוג מוצר",
+      "name": "eventType",
+      "label": "סוג האירוע",
       "type": "dropdown",
-      "required": true,
+      "required": false,
       "options": [
-        { "value": "electronics", "label": "אלקטרוניקה" },
-        { "value": "clothing", "label": "ביגוד" },
-        { "value": "books", "label": "ספרים" },
-        { "value": "home", "label": "בית וגן" },
-        { "value": "sports", "label": "ספורט" }
+        { "value": "conference", "label": "כנס" },
+        { "value": "workshop", "label": "סדנה" },
+        { "value": "webinar", "label": "וובינר" },
+        { "value": "other", "label": "אחר" }
       ],
       "errorMessages": {
-        "required": "יש לבחור סוג מוצר"
-      }
-    },
-    {
-      "name": "accessCode",
-      "label": "קוד גישה",
-      "type": "password",
-      "required": true,
-      "validation": {
-        "minLength": 6,
-        "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$"
-      },
-      "errorMessages": {
-        "required": "יש להזין קוד גישה",
-        "minLength": "קוד הגישה חייב להכיל לפחות 6 תווים",
-        "pattern": "הקוד חייב להכיל אות קטנה, אות גדולה וספרה אחת לפחות"
+        "invalidOption": "סוג האירוע שבחרת אינו תקף"
       }
     }
   ]

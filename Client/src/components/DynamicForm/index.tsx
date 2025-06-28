@@ -27,6 +27,9 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
     if (schema) {
       const schemaObject = createValidationSchema(schema.fields);
       setValidationSchema(yup.object().shape(schemaObject));
+
+      // Reset form errors when schema changes
+      setFormErrors({});
     }
     // eslint-disable-next-line
   }, [schema]);
@@ -55,6 +58,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
         return acc;
       }, {}) || {},
     validationSchema,
+    enableReinitialize: true, // This allows Formik to reinitialize when initialValues change
     onSubmit: async (values) => {
       try {
         const result = await onSubmit(values);

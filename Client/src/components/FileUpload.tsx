@@ -30,7 +30,7 @@ interface FileUploadProps {
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({ onSchemaUploaded }) => {
-  const { loading, setLoading, displayMessage } = useAppContext();
+  const { loading, setLoading, displayMessage, setSchema } = useAppContext();
 
   const handleDownloadExample = async (): Promise<void> => {
     try {
@@ -55,7 +55,12 @@ const FileUpload: React.FC<FileUploadProps> = ({ onSchemaUploaded }) => {
       const result = await uploadSchema(file);
       displayMessage(result.message, "success");
 
-      // Update schema in parent component if callback provided
+      // Update schema immediately in store for instant UI update
+      if (result.data?.schema) {
+        setSchema(result.data.schema);
+      }
+
+      // Also call parent callback if provided
       if (onSchemaUploaded && result.data?.schema) {
         await onSchemaUploaded(result.data.schema);
       }
