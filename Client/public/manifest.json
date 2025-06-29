@@ -1,6 +1,6 @@
 {
   "short_name": "Dynamic Forms",
-  "name": "מערכת טפסים דינמית",
+  "name": "Dynamic Form Generation System",
   "icons": [
     {
       "src": "favicon.ico",
@@ -12,6 +12,6 @@
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff",
-  "dir": "rtl",
-  "lang": "he"
+  "dir": "ltr",
+  "lang": "en"
 }

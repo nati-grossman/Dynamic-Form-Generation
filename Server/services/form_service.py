@@ -57,17 +57,17 @@ class FormService:
             self.current_form_id = form_id
             
             return {
-                "message": "הקובץ נשמר במערכת", 
+                "message": "File saved successfully", 
                 "form_id": form_id,
                 "schema": form_schema.dict()
             }
         
         except json.JSONDecodeError:
-            raise HTTPException(status_code=400, detail="הקובץ לא נתמך במערכת - JSON לא תקין")
+            raise HTTPException(status_code=400, detail="Invalid JSON file")
         except ValidationError as e:
-            raise HTTPException(status_code=400, detail=f"הקובץ לא נתמך במערכת - שגיאות וולידציה: {e}")
+            raise HTTPException(status_code=400, detail=f"File validation errors: {e}")
         except Exception as e:
-            raise HTTPException(status_code=400, detail="הקובץ לא נתמך במערכת")
+            raise HTTPException(status_code=400, detail="File not supported")
     
     def get_current_schema(self) -> dict:
         """Get current form schema (always from file)"""
@@ -123,8 +123,8 @@ class FormService:
             if check_duplicate_submission(validated_data.dict(), db):
                 return FormSubmissionResponse(
                     success=False,
-                    errors={"general": ["טופס זהה כבר הוגש קודם לכן"]},
-                    message="טופס זהה כבר הוגש קודם לכן"
+                    errors={"general": ["Identical form already submitted"]},
+                    message="Identical form already submitted"
                 )
             
             # Create fields mapping
@@ -173,7 +173,7 @@ class FormService:
             
             return FormSubmissionResponse(
                 success=True,
-                message="הטופס נשלח בהצלחה"
+                message="Form submitted successfully"
             )
         
         except ValidationError as e:
@@ -189,14 +189,14 @@ class FormService:
             return FormSubmissionResponse(
                 success=False,
                 errors=errors,
-                message="יש שגיאות בטופס"
+                message="Form has validation errors"
             )
         
         except Exception as e:
             return FormSubmissionResponse(
                 success=False,
                 errors={"general": [str(e)]},
-                message="שגיאה כללית בטופס"
+                message="General form error"
             )
 
 # Global instance

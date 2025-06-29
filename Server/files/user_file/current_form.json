@@ -1,58 +1,31 @@
 {
-  "title": "סקר שביעות רצון",
+  "title": "Course Registration",
   "fields": [
     {
-      "name": "customerName",
-      "label": "שם הלקוח",
+      "name": "fullName",
+      "label": "Full Name",
       "type": "text",
       "required": true,
       "validation": {
         "minLength": 2,
-        "maxLength": 30
+        "maxLength": 50
       }
     },
     {
-      "name": "serviceDate",
-      "label": "תאריך השירות",
-      "type": "date",
+      "name": "email",
+      "label": "Email Address",
+      "type": "email",
       "required": true
     },
     {
-      "name": "serviceType",
-      "label": "סוג השירות",
+      "name": "experience",
+      "label": "Experience Level",
       "type": "dropdown",
       "required": true,
       "options": [
-        { "value": "consultation", "label": "ייעוץ" },
-        { "value": "installation", "label": "התקנה" },
-        { "value": "maintenance", "label": "תחזוקה" },
-        { "value": "repair", "label": "תיקון" }
-      ]
-    },
-    {
-      "name": "overallSatisfaction",
-      "label": "שביעות רצון כללית",
-      "type": "dropdown",
-      "required": true,
-      "options": [
-        { "value": "1", "label": "לא מרוצה כלל" },
-        { "value": "2", "label": "לא מרוצה" },
-        { "value": "3", "label": "בסדר" },
-        { "value": "4", "label": "מרוצה" },
-        { "value": "5", "label": "מרוצה מאוד" }
-      ]
-    },
-    {
-      "name": "recommend",
-      "label": "האם תמליץ עלינו לאחרים?",
-      "type": "dropdown",
-      "required": true,
-      "options": [
-        { "value": "definitely", "label": "בהחלט כן" },
-        { "value": "probably", "label": "כנראה כן" },
-        { "value": "maybe", "label": "אולי" },
-        { "value": "probably_not", "label": "כנראה לא" },
-        { "value": "definitely_not", "label": "בהחלט לא" }
+        { "value": "beginner", "label": "Beginner" },
+        { "value": "intermediate", "label": "Intermediate" },
+        { "value": "advanced", "label": "Advanced" }
       ]
     }
   ]

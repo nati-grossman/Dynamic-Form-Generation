@@ -43,7 +43,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
       case "date":
         return "";
       case "number":
-        return ""; // כדי להימנע מ-uncontrolled, נשאיר מחרוזת ריקה (formik יטפל בהמרה)
+        return ""; // To avoid uncontrolled state, keep empty string (formik will handle conversion)
       case "dropdown":
         return "";
       default:
@@ -86,7 +86,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
     return (
       <Paper sx={{ p: 3, textAlign: "center" }}>
         <Typography variant="h6" color="textSecondary">
-          אין טופס זמין. אנא העלה קובץ JSON כדי ליצור טופס.
+          No form available. Please upload a JSON file to create a form.
         </Typography>
       </Paper>
     );
@@ -119,7 +119,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
             size="large"
             disabled={formik.isSubmitting}
           >
-            {formik.isSubmitting ? "שולח..." : "שלח טופס"}
+            {formik.isSubmitting ? "Submitting..." : "Submit Form"}
           </Button>
 
           <Button
@@ -129,7 +129,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({
             size="large"
             onClick={handleReset}
           >
-            איפוס
+            Reset
           </Button>
         </Box>
       </Box>

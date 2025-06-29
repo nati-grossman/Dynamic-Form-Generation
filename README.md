@@ -1,126 +1,130 @@
-# מערכת טפסים דינמית
+# Dynamic Form Generation System
 
-מערכת ליצירת טפסים דינמיים לפי קובץ JSON עם תמיכה בוולידציה מתקדמת ושמירה במסד נתונים.
+A system for creating dynamic forms based on JSON files with advanced validation support and database storage.
 
-## תכונות
+## Features
 
-- ✅ יצירת טפסים דינמיים לפי קובץ JSON
-- ✅ תמיכה בסוגי שדות: text, email, password, date, number, dropdown
-- ✅ וולידציה מתקדמת עם Pydantic v2 והודעות שגיאה מותאמות
-- ✅ שמירת טפסים במסד נתונים PostgreSQL
-- ✅ ממשק משתמש מודרני עם Material UI
-- ✅ תמיכה מלאה בעברית ו-RTL
-- ✅ הורדת קובץ דוגמה
-- ✅ הצגת רשימת הטפסים שהוגשו
-- ✅ מחיקת כל הטפסים
-- ✅ ארכיטקטורה מודולרית עם routers ו-services נפרדים
-- ✅ מודלים Pydantic מפוצלים לקבצים נפרדים
-- ✅ מחולל מודלים דינמיים לוולידציה בזמן ריצה
+- ✅ Dynamic form creation from JSON files
+- ✅ Support for field types: text, email, password, date, number, dropdown
+- ✅ Advanced validation with Pydantic v2 and custom error messages
+- ✅ Form storage in PostgreSQL database
+- ✅ Modern UI with Material UI
+- ✅ Full Hebrew and RTL support
+- ✅ Example file download
+- ✅ Display list of submitted forms
+- ✅ Delete all forms
+- ✅ Modular architecture with separate routers and services
+- ✅ Pydantic models split into separate files
+- ✅ Dynamic model generator for runtime validation
+- ✅ Full environment variables support
+- ✅ Comprehensive documentation for each module
+- ✅ CORS and Swagger docs support
 
-- ✅ תמיכה מלאה במשתני סביבה
-- ✅ דוקומנטציה מפורטת לכל מודול
-- ✅ תמיכה ב-CORS ו-Swagger docs
-
-## מבנה הפרויקט
+## Project Structure
 
 ```
 Dynamic Form Generation/
-├── README.md                   # תיעוד הפרויקט
-├── .gitignore                  # קבצים להתעלמות ב-Git
-├── start.bat                   # הפעלה מהירה ב-Windows
-├── start.sh                    # הפעלה מהירה ב-Linux/Mac
+├── README.md                   # Project documentation
+├── .gitignore                  # Files to ignore in Git
+├── start.bat                   # Quick start for Windows
+├── start.sh                    # Quick start for Linux/Mac
 │
-├── Server/                     # שרת Python עם FastAPI
-│   ├── main.py                # הקובץ הראשי של השרת
-│   ├── config.py              # הגדרות ומשתני סביבה
-│   ├── models.py              # נקודת כניסה למודלים Pydantic
-│   ├── database.py            # הגדרות מסד נתונים
-│   ├── requirements.txt       # תלויות Python
+├── Server/                     # Python server with FastAPI
+│   ├── main.py                # Main server file
+│   ├── config.py              # Settings and environment variables
+│   ├── models.py              # Pydantic models entry point
+│   ├── database.py            # Database configuration
+│   ├── requirements.txt       # Python dependencies
 │   │
-│   ├── routers/               # קונטולרים (API Routes)
-│   │   ├── forms.py          # קונטולר טפסים
-│   │   └── submissions.py    # קונטולר הגשות
+│   ├── routers/               # Controllers (API Routes)
+│   │   ├── forms.py          # Forms controller
+│   │   └── submissions.py    # Submissions controller
 │   │
-│   ├── services/              # שכבת שירותים
-│   │   ├── __init__.py       # ייצוא שירותים
-│   │   ├── form_service.py   # שירות לטפסים
-│   │   └── submission_service.py # שירות להגשות
+│   ├── services/              # Service layer
+│   │   ├── __init__.py       # Services export
+│   │   ├── form_service.py   # Forms service
+│   │   └── submission_service.py # Submissions service
 │   │
-│   ├── models/                # מודלים Pydantic מפוצלים
-│   │   ├── __init__.py       # ייצוא כל המודלים
-│   │   ├── base.py           # מודלים בסיסיים
-│   │   ├── form_field.py     # מודל שדה טופס
-│   │   ├── form_schema.py    # מודל סכמת טופס
-│   │   ├── submission.py     # מודל הגשה
-│   │   └── dynamic_validator.py # מחולל מודלים דינמיים
+│   ├── models/                # Split Pydantic models
+│   │   ├── __init__.py       # Export all models
+│   │   ├── base.py           # Base models
+│   │   ├── form_field.py     # Form field model
+│   │   ├── form_schema.py    # Form schema model
+│   │   ├── submission.py     # Submission model
+│   │   └── dynamic_validator.py # Dynamic model generator
 │   │
-│   └── files/                 # קבצי מערכת
-│       ├── example_file/      # קובץ דוגמה
-│       │   └── example1.json  # קובץ דוגמה להורדה למשתמש
-│       └── user_file/         # קבצי משתמש
-│           └── current_form.json # הסכמה הנוכחית
+│   └── files/                 # System files
+│       ├── example_file/      # Example file
+│       │   └── example1.json  # Example file for user download
+│       └── user_file/         # User files
+│           └── current_form.json # Current schema
 │
-├── Client/                    # אפליקציית React עם TypeScript
-│   ├── package.json          # תלויות Node.js
-│   ├── package-lock.json     # נעילת גרסאות
-│   ├── tsconfig.json         # הגדרות TypeScript
+├── Client/                    # React app with TypeScript
+│   ├── package.json          # Node.js dependencies
+│   ├── package-lock.json     # Version lock
+│   ├── tsconfig.json         # TypeScript settings
 │   │
-│   ├── public/               # קבצים סטטיים
-│   │   ├── index.html        # HTML ראשי
-│   │   └── manifest.json     # מניפסט אפליקציה
+│   ├── public/               # Static files
+│   │   ├── index.html        # Main HTML
+│   │   └── manifest.json     # App manifest
 │   │
-│   └── src/                  # קוד מקור
-│       ├── index.tsx         # נקודת כניסה לאפליקציה
-│       ├── App.tsx           # קומפוננטה ראשית
+│   └── src/                  # Source code
+│       ├── index.tsx         # App entry point
+│       ├── App.tsx           # Main component
 │       │
-│       ├── components/       # רכיבי React
-│       │   ├── DynamicForm/  # רכיב הטופס הדינמי
-│       │   │   ├── index.tsx # רכיב ראשי של הטופס
-│       │   │   ├── fieldRenderer.tsx # רנדרר שדות ראשי
-│       │   │   ├── types.ts  # טיפוסים ספציפיים
-│       │   │   ├── validation.ts # לוגיקת וולידציה
-│       │   │   └── renderers/ # רנדרים נפרדים לכל סוג שדה
-│       │   │       ├── index.ts # ייצוא רנדרים
+│       ├── components/       # React components
+│       │   ├── DynamicForm/  # Dynamic form component
+│       │   │   ├── index.tsx # Main form component
+│       │   │   ├── fieldRenderer.tsx # Main field renderer
+│       │   │   ├── types.ts  # Specific types
+│       │   │   ├── validation.ts # Validation logic
+│       │   │   └── renderers/ # Separate renderers for each field type
+│       │   │       ├── index.ts # Renderers export
 │       │   │       ├── TextFieldRenderer.tsx
 │       │   │       ├── DateFieldRenderer.tsx
 │       │   │       ├── NumberFieldRenderer.tsx
 │       │   │       └── SelectFieldRenderer.tsx
-│       │   ├── FileUpload.tsx # רכיב העלאת קבצים
-│       │   ├── MessageDisplay.tsx # רכיב הודעות
-│       │   └── SubmissionsList.tsx # רכיב רשימת הגשות
+│       │   ├── FileUpload.tsx # File upload component
+│       │   ├── MessageDisplay.tsx # Messages component
+│       │   ├── StatisticsDialog.tsx # Statistics component
+│       │   └── SubmissionsList.tsx # Submissions list component
 │       │
-│       ├── services/         # שירותי API
-│       │   ├── index.ts      # ייצוא שירותים
-│       │   ├── apiService.ts # שירות API בסיסי
-│       │   ├── formService.ts # שירות טפסים
-│       │   └── submissionService.ts # שירות הגשות
+│       ├── services/         # API services
+│       │   ├── index.ts      # Services export
+│       │   ├── apiService.ts # Basic API service
+│       │   ├── formService.ts # Forms service
+│       │   └── submissionService.ts # Submissions service
 │       │
-│       ├── store/            # ניהול מצב אפליקציה
-│       │   ├── index.ts      # ייצוא store
+│       ├── store/            # App state management
+│       │   ├── index.ts      # Store export
 │       │   ├── context.tsx   # React Context
-│       │   ├── hooks.ts      # hooks מותאמים
-│       │   ├── actions.ts    # פעולות store
-│       │   └── reducer.ts    # reducer לעדכון מצב
+│       │   ├── hooks.ts      # Custom hooks
+│       │   ├── actions.ts    # Store actions
+│       │   └── reducer.ts    # State update reducer
 │       │
-│       └── types/            # הגדרות טיפוסים
-│           └── index.ts      # טיפוסים גלובליים
+│       ├── hooks/            # Custom hooks
+│       │   ├── useInitialData.ts # Initial data hook
+│       │   └── useSubmissions.ts # Submissions hook
+│       │
+│       └── types/            # Type definitions
+│           └── index.ts      # Global types
 │
-└── Files to upload/          # קבצי דוגמה להעלאה
-    ├── example1.json         # דוגמה 1: טופס הזמנת מוצרים (עם dropdown)
-    ├── example2.json         # דוגמה 2: טופס יצירת קשר
-    ├── example3.json         # דוגמה 3: טופס רישום לקורס
-    └── example4.json         # דוגמה 4: סקר שביעות רצון
+└── Files to upload/          # Example files for upload
+    ├── example1.json         # Example 1: Product order form (with dropdown)
+    ├── example2.json         # Example 2: Contact form
+    ├── example3.json         # Example 3: Course registration form
+    └── example4.json         # Example 4: Satisfaction survey
 ```
 
-## התקנה והפעלה
+## Installation and Setup
 
-### דרישות מקדימות
+### Prerequisites
 
 - Python 3.8+
 - Node.js 16+
 - PostgreSQL
 
-### 1. הגדרת מסד הנתונים
+### 1. Database Setup
 
 ```sql
 CREATE DATABASE dynamic_forms;
@@ -128,9 +132,9 @@ CREATE USER postgres WITH PASSWORD 'password';
 GRANT ALL PRIVILEGES ON DATABASE dynamic_forms TO postgres;
 ```
 
-### 2. הגדרת משתני סביבה (אופציונלי)
+### 2. Environment Variables (Optional)
 
-ניתן ליצור קובץ `.env` בתיקיית `Server/` לעריכת הגדרות ברירת המחדל:
+You can create a `.env` file in the `Server/` directory to modify default settings:
 
 ```env
 # Database Configuration
@@ -145,21 +149,21 @@ DEBUG=true
 ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
 ```
 
-**הערה**: כל המשתנים הם אופציונליים ויש להם ערכי ברירת מחדל מתאימים לפיתוח.
+**Note**: All variables are optional and have appropriate default values for development.
 
-### 3. הפעלת השרת
+### 3. Server Setup
 
 ```bash
 cd Server
 pip install -r requirements.txt
 
-# הפעלת השרת
+# Start server
 python main.py
 ```
 
-השרת יפעל על: http://localhost:8000
+Server will run on: http://localhost:8000
 
-### 4. הפעלת הלקוח
+### 4. Client Setup
 
 ```bash
 cd Client
@@ -167,40 +171,44 @@ npm install
 npm start
 ```
 
-הלקוח יפעל על: http://localhost:3000
+Client will run on: http://localhost:3000
 
-### 5. הפעלה מהירה
+### 5. Quick Start
 
 - Windows: `start.bat`
 - Linux/Mac: `./start.sh`
 
-## שימוש במערכת
+## Using the System
 
-### 1. הורדת קובץ דוגמה
+### 1. Download Example File
 
-לחץ על כפתור "הורד קובץ דוגמה" כדי להוריד קובץ JSON עם מבנה תקין.
+Click "Download Example File" button to download a JSON file with valid structure.
 
-### 2. העלאת קובץ JSON
+### 2. Upload JSON File
 
-לחץ על "העלה קובץ JSON" ובחר קובץ JSON תקין. המערכת תבדוק את תקינות הקובץ ותציג הודעה מתאימה.
+Click "Upload JSON File" and select a valid JSON file. The system will validate the file and display an appropriate message.
 
-### 3. מילוי הטופס
+### 3. Fill the Form
 
-לאחר העלאת קובץ תקין, הטופס יופיע אוטומטית. מלא את השדות ולחץ על "שלח טופס".
+After uploading a valid file, the form will appear automatically. Fill the fields and click "Submit Form".
 
-### 4. צפייה בטפסים שהוגשו
+### 4. View Submitted Forms
 
-בצד ימין תוכל לראות את כל הטפסים שהוגשו. לחץ על כפתור המחיקה כדי למחוק את כל הטפסים.
+On the right side you can see all submitted forms. Click the delete button to delete all forms.
 
-## מבנה קובץ JSON
+### 5. View Statistics
+
+Click the "Statistics" button to see detailed statistics about submitted forms.
+
+## JSON File Structure
 
 ```json
 {
-  "title": "כותרת הטופס",
+  "title": "Form Title",
   "fields": [
     {
       "name": "fieldName",
-      "label": "תווית השדה",
+      "label": "Field Label",
       "type": "text|email|password|date|number|dropdown",
       "required": true,
       "validation": {
@@ -213,13 +221,13 @@ npm start
         "pattern": "regex_pattern"
       },
       "errorMessages": {
-        "required": "הודעת שגיאה לשדה חובה",
-        "minLength": "הודעת שגיאה לאורך מינימלי",
-        "maxLength": "הודעת שגיאה לאורך מקסימלי"
+        "required": "Error message for required field",
+        "minLength": "Error message for minimum length",
+        "maxLength": "Error message for maximum length"
       },
       "options": [
-        { "value": "option1", "label": "תווית 1" },
-        { "value": "option2", "label": "תווית 2" }
+        { "value": "option1", "label": "Label 1" },
+        { "value": "option2", "label": "Label 2" }
       ]
     }
   ]
@@ -228,77 +236,80 @@ npm start
 
 ## API Endpoints
 
-### טפסים (`/forms`)
+### Forms (`/forms`)
 
-- `GET /forms/download-example` - הורדת קובץ דוגמה
-- `POST /forms/upload-schema` - העלאת קובץ JSON
-- `GET /forms/current-schema` - קבלת הסכמה הנוכחית
-- `POST /forms/submit` - שליחת טופס
+- `GET /forms/download-example` - Download example file
+- `POST /forms/upload-schema` - Upload JSON file
+- `GET /forms/current-schema` - Get current schema
+- `POST /forms/submit` - Submit form
 
-### הגשות (`/submissions`)
+### Submissions (`/submissions`)
 
-- `GET /submissions/` - קבלת כל הטפסים שהוגשו
-- `DELETE /submissions/` - מחיקת כל הטפסים
+- `GET /submissions/` - Get all submitted forms
+- `GET /submissions/statistics` - Get submission statistics
+- `DELETE /submissions/` - Delete all forms
 
-## טכנולוגיות
+## Technologies
 
-### שרת
+### Server
 
-- **FastAPI**: מסגרת API מהירה עם תמיכה אוטומטית ב-Swagger
-- **Pydantic v2**: וולידציה וסריאליזציה מתקדמת
-- **SQLAlchemy**: ORM למסד נתונים
-- **PostgreSQL**: מסד נתונים יחסי
-- **Services Layer**: הפרדת לוגיקה עסקית מהראוטרים
-- **Dynamic Models**: יצירת מודלי וולידציה דינמיים בזמן ריצה
+- **FastAPI**: Fast API framework with automatic Swagger support
+- **Pydantic v2**: Advanced validation and serialization
+- **SQLAlchemy**: Database ORM
+- **PostgreSQL**: Relational database
+- **Services Layer**: Business logic separation from routers
+- **Dynamic Models**: Runtime validation model creation
 
-### לקוח
+### Client
 
-- **React**: ספריית UI
-- **Material UI**: רכיבי UI מודרניים
-- **Formik + Yup**: ניהול טפסים ווולידציה
-- **Fetch API**: תקשורת HTTP נטיבית עם השרת
+- **React**: UI library
+- **TypeScript**: Type safety
+- **Material UI**: Modern UI components
+- **Formik + Yup**: Form management and validation
+- **Fetch API**: Native HTTP communication with server
 
-### תקשורת
+### Communication
 
-- **RESTful API**: endpoints מובנים
-- **CORS**: תמיכה בגישה צולבת
-- **JSON**: פורמט נתונים סטנדרטי
+- **RESTful API**: Structured endpoints
+- **CORS**: Cross-origin access support
+- **JSON**: Standard data format
 
-## תמיכה בסוגי שדות
+## Supported Field Types
 
-| סוג שדה  | תיאור        | וולידציות נתמכות              |
-| -------- | ------------ | ----------------------------- |
-| text     | טקסט רגיל    | minLength, maxLength, pattern |
-| email    | כתובת אימייל | email format                  |
-| password | סיסמה        | minLength, pattern            |
-| date     | תאריך        | minDate, maxDate              |
-| number   | מספר         | min, max                      |
-| dropdown | רשימה נפתחת  | options validation            |
+| Field Type | Description   | Supported Validations         |
+| ---------- | ------------- | ----------------------------- |
+| text       | Regular text  | minLength, maxLength, pattern |
+| email      | Email address | email format                  |
+| password   | Password      | minLength, pattern            |
+| date       | Date          | minDate, maxDate              |
+| number     | Number        | min, max                      |
+| dropdown   | Select list   | options validation            |
 
-## הודעות שגיאה
+## Error Messages
 
-המערכת תומכת בהודעות שגיאה מותאמות אישית לכל שדה. אם לא מוגדרות הודעות שגיאה, המערכת תשתמש בהודעות ברירת מחדל בעברית.
+The system supports custom error messages for each field. If no error messages are defined, the system will use default messages in English.
 
-## ארכיטקטורת המערכת
+## System Architecture
 
-### שרת (Backend)
+### Server (Backend)
 
-- **FastAPI**: מסגרת API מהירה עם תמיכה אוטומטית ב-Swagger
-- **Pydantic v2**: וולידציה וסריאליזציה מתקדמת
-- **SQLAlchemy**: ORM למסד נתונים
-- **PostgreSQL**: מסד נתונים יחסי
-- **Services Layer**: הפרדת לוגיקה עסקית מהראוטרים
-- **Dynamic Models**: יצירת מודלי וולידציה דינמיים בזמן ריצה
+- **FastAPI**: Fast API framework with automatic Swagger support
+- **Pydantic v2**: Advanced validation and serialization
+- **SQLAlchemy**: Database ORM
+- **PostgreSQL**: Relational database
+- **Services Layer**: Business logic separation from routers
+- **Dynamic Models**: Runtime validation model creation
 
-### לקוח (Frontend)
+### Client (Frontend)
 
-- **React**: ספריית UI
-- **Material UI**: רכיבי UI מודרניים
-- **Formik + Yup**: ניהול טפסים ווולידציה
-- **Fetch API**: תקשורת HTTP נטיבית עם השרת
+- **React**: UI library
+- **TypeScript**: Type safety
+- **Material UI**: Modern UI components
+- **Formik + Yup**: Form management and validation
+- **Fetch API**: Native HTTP communication with server
 
-### תקשורת
+### Communication
 
-- **RESTful API**: endpoints מובנים
-- **CORS**: תמיכה בגישה צולבת
-- **JSON**: פורמט נתונים סטנדרטי
+- **RESTful API**: Structured endpoints
+- **CORS**: Cross-origin access support
+- **JSON**: Standard data format

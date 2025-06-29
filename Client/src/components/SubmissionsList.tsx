@@ -37,7 +37,7 @@ const SubmissionsList: React.FC<SubmissionsListProps> = ({
     if (!dateString) return "---";
     const date = new Date(dateString);
     if (isNaN(date.getTime())) return "---";
-    return date.toLocaleString("he-IL", {
+    return date.toLocaleString("en-US", {
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
@@ -53,11 +53,11 @@ const SubmissionsList: React.FC<SubmissionsListProps> = ({
   ) => {
     if (value === null || value === undefined || value === "") {
       return (
-        <span style={{ color: "#999", fontStyle: "italic" }}>לא הוזן</span>
+        <span style={{ color: "#999", fontStyle: "italic" }}>Not entered</span>
       );
     }
     if (typeof value === "boolean") {
-      return value ? "כן" : "לא";
+      return value ? "Yes" : "No";
     }
     if (typeof value === "object") {
       return JSON.stringify(value);
@@ -153,7 +153,7 @@ const SubmissionsList: React.FC<SubmissionsListProps> = ({
   if (!submissions.length) {
     return (
       <Paper sx={{ p: 3, textAlign: "center" }}>
-        <Typography variant="h6">לא הוגשו טפסים</Typography>
+        <Typography variant="h6">No forms submitted</Typography>
       </Paper>
     );
   }
@@ -169,9 +169,9 @@ const SubmissionsList: React.FC<SubmissionsListProps> = ({
         }}
       >
         <Typography variant="h5">
-          טפסים שהוגשו ({submissions.length})
+          Submitted Forms ({submissions.length})
         </Typography>
-        <Tooltip title="מחק את כל ההגשות">
+        <Tooltip title="Delete all submissions">
           <IconButton onClick={onDeleteAll} color="error">
             <DeleteIcon />
           </IconButton>
@@ -199,7 +199,7 @@ const SubmissionsList: React.FC<SubmissionsListProps> = ({
                     sx={{ mr: 1 }}
                   />
                   <Typography variant="subtitle1" component="span">
-                    {submission.form_title || `הגשה #${idx + 1}`}
+                    {submission.form_title || `Submission #${idx + 1}`}
                   </Typography>
                 </Box>
                 <Typography variant="caption" color="textSecondary">

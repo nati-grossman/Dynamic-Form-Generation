@@ -1,9 +1,9 @@
 {
-  "title": "טופס הזמנת מוצרים",
+  "title": "Product Order Form",
   "fields": [
     {
       "name": "customerName",
-      "label": "שם הלקוח",
+      "label": "Customer Name",
       "type": "text",
       "required": true,
       "validation": {
@@ -11,27 +11,27 @@
         "maxLength": 100
       },
       "errorMessages": {
-        "required": "נא להזין את שם הלקוח",
-        "minLength": "השם צריך להכיל לפחות 3 תווים",
-        "maxLength": "השם לא יכול להכיל יותר מ-100 תווים"
+        "required": "Please enter customer name",
+        "minLength": "Name must contain at least 3 characters",
+        "maxLength": "Name cannot contain more than 100 characters"
       }
     },
     {
       "name": "customerEmail",
-      "label": "כתובת אימייל",
+      "label": "Email Address",
       "type": "email",
       "required": true,
       "validation": {
         "email": true
       },
       "errorMessages": {
-        "required": "נא להזין כתובת אימייל",
-        "email": "כתובת אימייל לא תקינה"
+        "required": "Please enter email address",
+        "email": "Invalid email address"
       }
     },
     {
       "name": "orderDate",
-      "label": "תאריך הזמנה",
+      "label": "Order Date",
       "type": "date",
       "required": true,
       "validation": {
@@ -39,14 +39,14 @@
         "maxDate": "2025-06-27"
       },
       "errorMessages": {
-        "required": "נא להזין תאריך",
-        "minDate": "התאריך מוקדם מדי",
-        "maxDate": "התאריך מאוחר מדי"
+        "required": "Please enter date",
+        "minDate": "Date is too early",
+        "maxDate": "Date is too late"
       }
     },
     {
       "name": "quantity",
-      "label": "כמות מוצרים",
+      "label": "Product Quantity",
       "type": "number",
       "required": true,
       "validation": {
@@ -54,30 +54,30 @@
         "max": 1000
       },
       "errorMessages": {
-        "required": "נא להזין כמות מוצרים",
-        "min": "כמות המוצרים צריכה להיות לפחות 1",
-        "max": "כמות המוצרים לא יכולה לעלות על 1000"
+        "required": "Please enter product quantity",
+        "min": "Product quantity must be at least 1",
+        "max": "Product quantity cannot exceed 1000"
       }
     },
     {
       "name": "productType",
-      "label": "סוג מוצר",
+      "label": "Product Type",
       "type": "dropdown",
       "required": true,
       "options": [
-        { "value": "electronics", "label": "אלקטרוניקה" },
-        { "value": "clothing", "label": "ביגוד" },
-        { "value": "books", "label": "ספרים" },
-        { "value": "home", "label": "בית וגן" },
-        { "value": "sports", "label": "ספורט" }
+        { "value": "electronics", "label": "Electronics" },
+        { "value": "clothing", "label": "Clothing" },
+        { "value": "books", "label": "Books" },
+        { "value": "home", "label": "Home & Garden" },
+        { "value": "sports", "label": "Sports" }
       ],
       "errorMessages": {
-        "required": "יש לבחור סוג מוצר"
+        "required": "Please select product type"
       }
     },
     {
       "name": "accessCode",
-      "label": "קוד גישה",
+      "label": "Access Code",
       "type": "password",
       "required": true,
       "validation": {
@@ -85,9 +85,9 @@
         "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$"
       },
       "errorMessages": {
-        "required": "יש להזין קוד גישה",
-        "minLength": "קוד הגישה חייב להכיל לפחות 6 תווים",
-        "pattern": "הקוד חייב להכיל אות קטנה, אות גדולה וספרה אחת לפחות"
+        "required": "Please enter access code",
+        "minLength": "Access code must contain at least 6 characters",
+        "pattern": "Code must contain at least one lowercase letter, one uppercase letter and one digit"
       }
     }
   ]

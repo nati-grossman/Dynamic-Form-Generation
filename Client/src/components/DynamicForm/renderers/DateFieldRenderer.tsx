@@ -39,6 +39,9 @@ export const DateFieldRenderer: React.FC<FieldRendererProps> = ({
       InputLabelProps={{
         shrink: true,
       }}
+      inputProps={{
+        lang: "en-US",
+      }}
     />
   );
 };

@@ -59,7 +59,7 @@ const AppContent: React.FC = () => {
       }
     } catch (error: any) {
       displayMessage(error.message, "error");
-      return { success: false, errors: {}, message: error.message || "שגיאה" };
+      return { success: false, errors: {}, message: error.message || "Error" };
     }
   };
 
@@ -86,16 +86,19 @@ const AppContent: React.FC = () => {
           align="center"
           sx={{ flex: 1 }}
         >
-          מערכת טפסים דינמית
+          Dynamic Form System
         </Typography>
 
         <Button
           variant="outlined"
           startIcon={<AssessmentIcon />}
           onClick={() => setStatisticsOpen(true)}
-          sx={{ minWidth: "auto" }}
+          sx={{
+            minWidth: "auto",
+            "& .MuiButton-startIcon": { marginRight: 1 },
+          }}
         >
-          סטטיסטיקות
+          Statistics
         </Button>
       </Box>
 

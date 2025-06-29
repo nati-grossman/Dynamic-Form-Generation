@@ -51,7 +51,7 @@ const StatisticsDialog: React.FC<StatisticsDialogProps> = ({
       const stats = await getStatistics();
       setStatistics(stats);
     } catch (err: any) {
-      setError(err.message || "שגיאה בטעינת הסטטיסטיקות");
+      setError(err.message || "Error loading statistics");
     } finally {
       setLoading(false);
     }
@@ -79,9 +79,9 @@ const StatisticsDialog: React.FC<StatisticsDialogProps> = ({
         sx: { minHeight: "400px" },
       }}
     >
-      <DialogTitle sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+      <DialogTitle sx={{ display: "flex", alignItems: "center", gap: 2 }}>
         <AssessmentIcon />
-        סטטיסטיקות הטפסים
+        Form Statistics
       </DialogTitle>
 
       <DialogContent>
@@ -112,7 +112,7 @@ const StatisticsDialog: React.FC<StatisticsDialogProps> = ({
                     {statistics.total_submissions}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    סך הכל הגשות
+                    Total Submissions
                   </Typography>
                 </CardContent>
               </Card>
@@ -123,7 +123,7 @@ const StatisticsDialog: React.FC<StatisticsDialogProps> = ({
                     {statistics.total_forms}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    סוגי טפסים שונים
+                    Different Form Types
                   </Typography>
                 </CardContent>
               </Card>
@@ -131,16 +131,16 @@ const StatisticsDialog: React.FC<StatisticsDialogProps> = ({
 
             {/* Forms Statistics */}
             {statistics.forms.length === 0 ? (
-              <Alert severity="info">אין עדיין הגשות במערכת</Alert>
+              <Alert severity="info">No submissions in the system yet</Alert>
             ) : (
               <Box>
                 <Typography
                   variant="h6"
                   gutterBottom
-                  sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                  sx={{ display: "flex", alignItems: "center", gap: 2 }}
                 >
                   <BarChartIcon />
-                  פירוט לפי טפסים
+                  Breakdown by Forms
                 </Typography>
 
                 {statistics.forms.map((form, index) => (
@@ -154,13 +154,13 @@ const StatisticsDialog: React.FC<StatisticsDialogProps> = ({
                       >
                         <Typography
                           variant="h6"
-                          sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                          sx={{ display: "flex", alignItems: "center", gap: 2 }}
                         >
                           <DescriptionIcon />
                           {form.title}
                         </Typography>
                         <Chip
-                          label={`${form.count} הגשות`}
+                          label={`${form.count} submissions`}
                           color="primary"
                           variant="outlined"
                         />
@@ -170,18 +170,14 @@ const StatisticsDialog: React.FC<StatisticsDialogProps> = ({
                         <>
                           <Divider sx={{ mb: 2 }} />
                           <Typography variant="subtitle2" gutterBottom>
-                            שדות בטופס:
+                            Form Fields:
                           </Typography>
                           <List dense>
                             {form.fields.map((field, fieldIndex) => (
                               <ListItem key={fieldIndex} sx={{ py: 0.5 }}>
                                 <ListItemText
                                   primary={field.label}
-                                  secondary={field.name}
                                   primaryTypographyProps={{ variant: "body2" }}
-                                  secondaryTypographyProps={{
-                                    variant: "caption",
-                                  }}
                                 />
                               </ListItem>
                             ))}
@@ -198,9 +194,9 @@ const StatisticsDialog: React.FC<StatisticsDialogProps> = ({
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={handleClose}>סגור</Button>
+        <Button onClick={handleClose}>Close</Button>
         <Button onClick={loadStatistics} disabled={loading}>
-          רענן
+          Refresh
         </Button>
       </DialogActions>
     </Dialog>

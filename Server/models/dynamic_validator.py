@@ -173,20 +173,20 @@ class DynamicFormSubmissionGenerator:
     def _validate_text_field(v: Any, validation: Optional[Any], error_messages: Optional[Any]) -> str:
         """Validates text field with length and pattern constraints"""
         if not isinstance(v, str):
-            raise ValueError("ערך חייב להיות מחרוזת")
+            raise ValueError("Value must be a string")
         
         if validation:
             if validation.minLength and len(v) < validation.minLength:
-                error_msg = error_messages.minLength if error_messages and error_messages.minLength else f"מינימום {validation.minLength} תווים"
+                error_msg = error_messages.minLength if error_messages and error_messages.minLength else f"Minimum {validation.minLength} characters"
                 raise ValueError(error_msg)
             
             if validation.maxLength and len(v) > validation.maxLength:
-                error_msg = error_messages.maxLength if error_messages and error_messages.maxLength else f"מקסימום {validation.maxLength} תווים"
+                error_msg = error_messages.maxLength if error_messages and error_messages.maxLength else f"Maximum {validation.maxLength} characters"
                 raise ValueError(error_msg)
             
             if validation.pattern:
                 if not re.match(validation.pattern, v):
-                    error_msg = error_messages.pattern if error_messages and error_messages.pattern else "ערך לא עומד בתבנית הנדרשת"
+                    error_msg = error_messages.pattern if error_messages and error_messages.pattern else "Value does not match required pattern"
                     raise ValueError(error_msg)
         
         return v
@@ -195,11 +195,11 @@ class DynamicFormSubmissionGenerator:
     def _validate_email_field(v: Any, error_messages: Optional[Any]) -> str:
         """Validates email field format"""
         if not isinstance(v, str):
-            raise ValueError("ערך חייב להיות מחרוזת")
+            raise ValueError("Value must be a string")
         
         email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         if not re.match(email_pattern, v):
-            error_msg = error_messages.email if error_messages and error_messages.email else "כתובת אימייל לא תקינה"
+            error_msg = error_messages.email if error_messages and error_messages.email else "Invalid email address"
             raise ValueError(error_msg)
         
         return v
@@ -208,16 +208,16 @@ class DynamicFormSubmissionGenerator:
     def _validate_password_field(v: Any, validation: Optional[Any], error_messages: Optional[Any]) -> str:
         """Validates password field with length and pattern constraints"""
         if not isinstance(v, str):
-            raise ValueError("ערך חייב להיות מחרוזת")
+            raise ValueError("Value must be a string")
         
         if validation:
             if validation.minLength and len(v) < validation.minLength:
-                error_msg = error_messages.minLength if error_messages and error_messages.minLength else f"מינימום {validation.minLength} תווים"
+                error_msg = error_messages.minLength if error_messages and error_messages.minLength else f"Minimum {validation.minLength} characters"
                 raise ValueError(error_msg)
             
             if validation.pattern:
                 if not re.match(validation.pattern, v):
-                    error_msg = error_messages.pattern if error_messages and error_messages.pattern else "סיסמה לא עומדת בדרישות"
+                    error_msg = error_messages.pattern if error_messages and error_messages.pattern else "Password does not meet requirements"
                     raise ValueError(error_msg)
         
         return v
@@ -232,25 +232,25 @@ class DynamicFormSubmissionGenerator:
                 date_value = v
                 v = date_value.strftime("%Y-%m-%d")
             else:
-                raise ValueError("ערך חייב להיות תאריך תקין")
+                raise ValueError("Value must be a valid date")
             
             if validation:
                 if validation.minDate:
                     min_date = datetime.strptime(validation.minDate, "%Y-%m-%d").date()
                     if date_value < min_date:
-                        error_msg = error_messages.minDate if error_messages and error_messages.minDate else f"תאריך מוקדם מדי (מינימום: {validation.minDate})"
+                        error_msg = error_messages.minDate if error_messages and error_messages.minDate else f"Date is too early (minimum: {validation.minDate})"
                         raise ValueError(error_msg)
                 
                 if validation.maxDate:
                     max_date = datetime.strptime(validation.maxDate, "%Y-%m-%d").date()
                     if date_value > max_date:
-                        error_msg = error_messages.maxDate if error_messages and error_messages.maxDate else f"תאריך מאוחר מדי (מקסימום: {validation.maxDate})"
+                        error_msg = error_messages.maxDate if error_messages and error_messages.maxDate else f"Date is too late (maximum: {validation.maxDate})"
                         raise ValueError(error_msg)
         
         except ValueError as e:
-            if "תאריך מוקדם מדי" in str(e) or "תאריך מאוחר מדי" in str(e):
+            if "Date is too early" in str(e) or "Date is too late" in str(e):
                 raise e
-            raise ValueError("פורמט תאריך לא תקין. השתמש בפורמט YYYY-MM-DD")
+            raise ValueError("Invalid date format. Use YYYY-MM-DD format")
         
         return v
     
@@ -260,21 +260,21 @@ class DynamicFormSubmissionGenerator:
         try:
             num_value = float(v) if v is not None else None
             if num_value is None:
-                raise ValueError("ערך חייב להיות מספר")
+                raise ValueError("Value must be a number")
             
             if validation:
                 if validation.min is not None and num_value < validation.min:
-                    error_msg = error_messages.min if error_messages and error_messages.min else f"ערך מינימלי: {validation.min}"
+                    error_msg = error_messages.min if error_messages and error_messages.min else f"Minimum value: {validation.min}"
                     raise ValueError(error_msg)
                 
                 if validation.max is not None and num_value > validation.max:
-                    error_msg = error_messages.max if error_messages and error_messages.max else f"ערך מקסימלי: {validation.max}"
+                    error_msg = error_messages.max if error_messages and error_messages.max else f"Maximum value: {validation.max}"
                     raise ValueError(error_msg)
         
         except (ValueError, TypeError) as e:
-            if "ערך מינימלי" in str(e) or "ערך מקסימלי" in str(e):
+            if "Minimum value:" in str(e) or "Maximum value:" in str(e):
                 raise e
-            raise ValueError("ערך חייב להיות מספר תקין")
+            raise ValueError("Value must be a valid number")
         
         return num_value
     
@@ -282,11 +282,11 @@ class DynamicFormSubmissionGenerator:
     def _validate_dropdown_field(v: Any, options: Optional[list], error_messages: Optional[Any]) -> str:
         """Validates dropdown field against available options"""
         if not isinstance(v, str):
-            raise ValueError("ערך חייב להיות מחרוזת")
+            raise ValueError("Value must be a string")
         
         valid_options = [option.value for option in options] if options else []
         if v not in valid_options:
-            error_msg = error_messages.invalidOption if error_messages and error_messages.invalidOption else "אפשרות לא תקינה"
+            error_msg = error_messages.invalidOption if error_messages and error_messages.invalidOption else "Invalid option"
             raise ValueError(error_msg)
         
         return v 

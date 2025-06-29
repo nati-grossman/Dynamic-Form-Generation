@@ -1,9 +1,9 @@
 {
-  "title": "סקר שביעות רצון",
+  "title": "Customer Satisfaction Survey",
   "fields": [
     {
       "name": "customerName",
-      "label": "שם הלקוח",
+      "label": "Customer Name",
       "type": "text",
       "required": true,
       "validation": {
@@ -13,46 +13,46 @@
     },
     {
       "name": "serviceDate",
-      "label": "תאריך השירות",
+      "label": "Service Date",
       "type": "date",
       "required": true
     },
     {
       "name": "serviceType",
-      "label": "סוג השירות",
+      "label": "Service Type",
       "type": "dropdown",
       "required": true,
       "options": [
-        { "value": "consultation", "label": "ייעוץ" },
-        { "value": "installation", "label": "התקנה" },
-        { "value": "maintenance", "label": "תחזוקה" },
-        { "value": "repair", "label": "תיקון" }
+        { "value": "consultation", "label": "Consultation" },
+        { "value": "installation", "label": "Installation" },
+        { "value": "maintenance", "label": "Maintenance" },
+        { "value": "repair", "label": "Repair" }
       ]
     },
     {
       "name": "overallSatisfaction",
-      "label": "שביעות רצון כללית",
+      "label": "Overall Satisfaction",
       "type": "dropdown",
       "required": true,
       "options": [
-        { "value": "1", "label": "לא מרוצה כלל" },
-        { "value": "2", "label": "לא מרוצה" },
-        { "value": "3", "label": "בסדר" },
-        { "value": "4", "label": "מרוצה" },
-        { "value": "5", "label": "מרוצה מאוד" }
+        { "value": "1", "label": "Very Dissatisfied" },
+        { "value": "2", "label": "Dissatisfied" },
+        { "value": "3", "label": "Neutral" },
+        { "value": "4", "label": "Satisfied" },
+        { "value": "5", "label": "Very Satisfied" }
       ]
     },
     {
       "name": "recommend",
-      "label": "האם תמליץ עלינו לאחרים?",
+      "label": "Would you recommend us to others?",
       "type": "dropdown",
       "required": true,
       "options": [
-        { "value": "definitely", "label": "בהחלט כן" },
-        { "value": "probably", "label": "כנראה כן" },
-        { "value": "maybe", "label": "אולי" },
-        { "value": "probably_not", "label": "כנראה לא" },
-        { "value": "definitely_not", "label": "בהחלט לא" }
+        { "value": "definitely", "label": "Definitely Yes" },
+        { "value": "probably", "label": "Probably Yes" },
+        { "value": "maybe", "label": "Maybe" },
+        { "value": "probably_not", "label": "Probably Not" },
+        { "value": "definitely_not", "label": "Definitely Not" }
       ]
     }
   ]

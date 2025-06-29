@@ -46,7 +46,7 @@ export const uploadSchema = async (
 export const getCurrentSchema = async (): Promise<FormSchema> => {
   return await handleApiCall<FormSchema>(
     () => apiClient.get("/forms/current-schema"),
-    "שגיאה בקבלת סכמת הטופס"
+    "Error getting form schema"
   );
 };
 
@@ -68,6 +68,6 @@ export const submitForm = async (formData: {
     if (error.response?.data) {
       return error.response.data;
     }
-    throw new Error("שגיאה בשליחת הטופס");
+    throw new Error("Error submitting form");
   }
 };

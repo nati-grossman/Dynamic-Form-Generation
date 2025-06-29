@@ -20,7 +20,7 @@ def create_submission(request: SubmissionRequest, db: Session = Depends(get_db))
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"שגיאה בשמירת הטפס: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error saving form: {str(e)}")
 
 @router.get("/")
 def get_submissions(db: Session = Depends(get_db)):
@@ -28,7 +28,7 @@ def get_submissions(db: Session = Depends(get_db)):
     try:
         return submission_service.get_all_submissions(db)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"שגיאה בקבלת הטפסים: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error getting forms: {str(e)}")
 
 @router.get("/statistics")
 def get_statistics(db: Session = Depends(get_db)):
@@ -36,7 +36,7 @@ def get_statistics(db: Session = Depends(get_db)):
     try:
         return submission_service.get_statistics(db)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"שגיאה בקבלת הסטטיסטיקות: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error getting statistics: {str(e)}")
 
 @router.delete("/")
 def delete_all_submissions(db: Session = Depends(get_db)):
@@ -44,4 +44,4 @@ def delete_all_submissions(db: Session = Depends(get_db)):
     try:
         return submission_service.delete_all_submissions(db)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"שגיאה במחיקת הטפסים: {str(e)}") 
+        raise HTTPException(status_code=500, detail=f"Error deleting forms: {str(e)}") 

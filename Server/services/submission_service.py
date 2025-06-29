@@ -14,7 +14,7 @@ class SubmissionService:
         """Create a new form submission with duplicate checking"""
         # Check for duplicate submission
         if check_duplicate_submission(form_data, db):
-            raise ValueError("קיים דאטה כזה במסד נתונים")
+            raise ValueError("Such data already exists in database")
         
         # Generate unique ID and hash
         submission_id = str(uuid.uuid4())
@@ -39,7 +39,7 @@ class SubmissionService:
             "form_title": submission.form_title,
             "data": submission.data,
             "submitted_at": submission.submitted_at,
-            "message": "הטפס נשמר בהצלחה"
+            "message": "Form saved successfully"
         }
     
     def get_all_submissions(self, db: Session) -> List[Dict[str, Any]]:
@@ -100,14 +100,12 @@ class SubmissionService:
                     # New format: {"fields_mapping": {...}, "selected_options_labels": {...}}
                     for field_name, field_label in fields_data["fields_mapping"].items():
                         form_stat["fields"].append({
-                            "name": field_name,
                             "label": field_label
                         })
                 # Handle old direct dict format
                 elif isinstance(fields_data, dict):
                     for field_name, field_label in fields_data.items():
                         form_stat["fields"].append({
-                            "name": field_name,
                             "label": field_label
                         })
                 # Handle old list format
@@ -115,7 +113,6 @@ class SubmissionService:
                     for field in fields_data:
                         if isinstance(field, dict) and "name" in field and "label" in field:
                             form_stat["fields"].append({
-                                "name": field["name"],
                                 "label": field["label"]
                             })
             
@@ -127,7 +124,7 @@ class SubmissionService:
         """Delete all form submissions from database"""
         db.query(FormSubmissionDB).delete()
         db.commit()
-        return {"message": "כל הטפסים נמחקו בהצלחה"}
+        return {"message": "All forms deleted successfully"}
 
 # Global instance
 submission_service = SubmissionService() 

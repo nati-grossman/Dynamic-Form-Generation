@@ -37,7 +37,7 @@ export const useSubmissions = () => {
         setSubmissions(updatedSubmissions);
         lastFetchTime.current = now;
       } catch (error: any) {
-        displayMessage("שגיאה בטעינת הטפסים שהוגשו", "error");
+        displayMessage("Error loading submitted forms", "error");
       } finally {
         setLoading(false);
       }
@@ -50,7 +50,7 @@ export const useSubmissions = () => {
       setLoading(true);
       await deleteAllSubmissions();
       clearSubmissions();
-      displayMessage("כל הטפסים נמחקו בהצלחה", "success");
+      displayMessage("All forms deleted successfully", "success");
       lastFetchTime.current = 0; // Reset cache
     } catch (error: any) {
       displayMessage(error.message, "error");

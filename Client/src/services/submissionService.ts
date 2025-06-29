@@ -17,7 +17,7 @@ import { SubmissionDB, ApiResponse, FormStatistics } from "@/types";
 export const getSubmissions = async (): Promise<SubmissionDB[]> => {
   return await handleApiCall<SubmissionDB[]>(
     () => apiClient.get("/submissions/"),
-    "שגיאה בקבלת הטפסים שהוגשו"
+    "Error getting submitted forms"
   );
 };
 
@@ -28,7 +28,7 @@ export const getSubmissions = async (): Promise<SubmissionDB[]> => {
 export const getStatistics = async (): Promise<FormStatistics> => {
   return await handleApiCall<FormStatistics>(
     () => apiClient.get("/submissions/statistics"),
-    "שגיאה בקבלת הסטטיסטיקות"
+    "Error getting statistics"
   );
 };
 
@@ -39,7 +39,7 @@ export const getStatistics = async (): Promise<FormStatistics> => {
 export const deleteAllSubmissions = async (): Promise<ApiResponse> => {
   return await handleApiCall<ApiResponse>(
     () => apiClient.delete("/submissions/"),
-    "שגיאה במחיקת הטפסים"
+    "Error deleting forms"
   );
 };
 
@@ -51,7 +51,7 @@ export const deleteAllSubmissions = async (): Promise<ApiResponse> => {
 export const getSubmissionById = async (id: string): Promise<SubmissionDB> => {
   return await handleApiCall<SubmissionDB>(
     () => apiClient.get(`/submissions/${id}`),
-    "שגיאה בקבלת הטופס"
+    "Error getting form"
   );
 };
 
@@ -65,6 +65,6 @@ export const deleteSubmissionById = async (
 ): Promise<ApiResponse> => {
   return await handleApiCall<ApiResponse>(
     () => apiClient.delete(`/submissions/${id}`),
-    "שגיאה במחיקת הטופס"
+    "Error deleting form"
   );
 };

@@ -35,7 +35,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onSchemaUploaded }) => {
     try {
       setLoading(true);
       await downloadExample();
-      displayMessage("קובץ הדוגמה הורד בהצלחה", "success");
+      displayMessage("Example file downloaded successfully", "success");
     } catch (error: any) {
       displayMessage(error.message, "error");
     } finally {
@@ -52,7 +52,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onSchemaUploaded }) => {
     try {
       setLoading(true);
       const result = await uploadSchema(file);
-      displayMessage(result.message || "הקובץ הועלה בהצלחה", "success");
+      displayMessage(result.message || "File uploaded successfully", "success");
 
       // Call parent callback if provided, otherwise set schema directly
       if (onSchemaUploaded && result.schema) {
@@ -72,7 +72,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onSchemaUploaded }) => {
   return (
     <Paper sx={{ p: 3, mb: 4 }}>
       <Typography variant="h5" gutterBottom>
-        העלאת קובץ JSON
+        JSON File Upload
       </Typography>
 
       <Grid container spacing={2} alignItems="center">
@@ -82,8 +82,9 @@ const FileUpload: React.FC<FileUploadProps> = ({ onSchemaUploaded }) => {
             startIcon={<DownloadIcon />}
             onClick={handleDownloadExample}
             disabled={loading}
+            sx={{ "& .MuiButton-startIcon": { marginRight: 1 } }}
           >
-            הורד קובץ דוגמה
+            Download Example File
           </Button>
         </Grid>
 
@@ -93,8 +94,9 @@ const FileUpload: React.FC<FileUploadProps> = ({ onSchemaUploaded }) => {
             component="label"
             startIcon={<UploadIcon />}
             disabled={loading}
+            sx={{ "& .MuiButton-startIcon": { marginRight: 1 } }}
           >
-            העלה קובץ JSON
+            Upload JSON File
             <input
               type="file"
               accept=".json"

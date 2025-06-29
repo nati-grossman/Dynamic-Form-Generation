@@ -20,7 +20,7 @@ class FormSubmissionDB(Base):
     data = Column(JSON, nullable=False)  # JSON data of submitted form
     submitted_at = Column(String, nullable=False)  # Submission timestamp as string
     data_hash = Column(String, unique=True, index=True, nullable=False)  # Hash to prevent duplicates
-    fields_mapping = Column(JSON, nullable=True)  # חדש: mapping name→label
+    fields_mapping = Column(JSON, nullable=True)  # New: mapping name→label
 
 def get_db():
     db = SessionLocal()

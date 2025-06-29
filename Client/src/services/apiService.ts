@@ -56,7 +56,7 @@ const fetchWithTimeout = async (
  */
 const handleApiCall = async <T = any>(
   apiCall: () => Promise<Response>,
-  errorMessage: string = "שגיאה כללית"
+  errorMessage: string = "General error"
 ): Promise<T> => {
   try {
     const response = await apiCall();
@@ -106,7 +106,7 @@ const downloadFile = async (
 
     return { success: true };
   } catch (error: any) {
-    throw new Error("שגיאה בהורדת הקובץ");
+    throw new Error("Error downloading file");
   }
 };
 
@@ -142,7 +142,7 @@ const uploadFile = async <T = any>(
 
     return await response.json();
   } catch (error: any) {
-    const message = error.message || "שגיאה בהעלאת הקובץ";
+    const message = error.message || "Error uploading file";
     throw new Error(message);
   }
 };

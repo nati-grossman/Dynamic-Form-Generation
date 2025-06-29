@@ -1,9 +1,9 @@
 {
-  "title": "רישום לקורס פיתוח",
+  "title": "Course Registration",
   "fields": [
     {
       "name": "fullName",
-      "label": "שם מלא",
+      "label": "Full Name",
       "type": "text",
       "required": true,
       "validation": {
@@ -13,19 +13,19 @@
     },
     {
       "name": "email",
-      "label": "כתובת אימייל",
+      "label": "Email Address",
       "type": "email",
       "required": true
     },
     {
       "name": "experience",
-      "label": "רמת ניסיון",
+      "label": "Experience Level",
       "type": "dropdown",
       "required": true,
       "options": [
-        { "value": "beginner", "label": "מתחיל" },
-        { "value": "intermediate", "label": "בינוני" },
-        { "value": "advanced", "label": "מתקדם" }
+        { "value": "beginner", "label": "Beginner" },
+        { "value": "intermediate", "label": "Intermediate" },
+        { "value": "advanced", "label": "Advanced" }
       ]
     }
   ]

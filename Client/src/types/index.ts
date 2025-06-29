@@ -93,7 +93,6 @@ export interface FormStat {
 }
 
 export interface FieldStat {
-  name: string;
   label: string;
 }
 
