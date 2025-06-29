@@ -6,7 +6,7 @@
  */
 
 import React from "react";
-import { FieldRendererProps } from "./types";
+import { FieldRendererProps } from "./dynamicFormTypes";
 import {
   TextFieldRenderer,
   DateFieldRenderer,

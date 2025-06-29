@@ -20,7 +20,7 @@ import { useSubmissions } from "./hooks/useSubmissions";
 
 // Components
 import FileUpload from "./components/FileUpload";
-import DynamicForm from "./components/DynamicForm";
+import DynamicForm from "./components/DynamicForm/DynamicForm";
 import SubmissionsList from "./components/SubmissionsList";
 import MessageDisplay from "./components/MessageDisplay";
 import StatisticsDialog from "./components/StatisticsDialog";

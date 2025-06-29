@@ -1,5 +1,5 @@
 /**
- * DynamicForm Validation - Yup validation logic for dynamic forms
+ * Field Validation Builder - Creates validation schema for individual form fields
  *
  * This module handles:
  * - Field-specific validation rules
@@ -8,8 +8,7 @@
  */
 
 import * as yup from "yup";
-import { FormField } from "@/types/appTypes";
-import { ValidationSchema } from "./types";
+import { FormField } from "@/types/typesExports";
 
 /**
  * Create validation schema for a specific field type
@@ -144,21 +143,4 @@ export const createFieldValidation = (field: FormField): yup.AnySchema => {
   }
 
   return fieldValidation;
-};
-
-/**
- * Create complete validation schema for all form fields
- * @param fields - Array of form fields
- * @returns Complete Yup validation schema
- */
-export const createValidationSchema = (
-  fields: FormField[]
-): ValidationSchema => {
-  const validationObject: ValidationSchema = {};
-
-  fields.forEach((field: FormField) => {
-    validationObject[field.name] = createFieldValidation(field);
-  });
-
-  return validationObject;
 };

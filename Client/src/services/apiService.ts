@@ -6,10 +6,10 @@
  * centralized configuration using native fetch API.
  */
 
-import { ApiClient } from "@/types/appTypes";
+import { ApiClient } from "@/types/typesExports";
 
 // API Configuration
-const API_CONFIG = {
+export const API_CONFIG = {
   baseURL: process.env.REACT_APP_API_URL || "http://localhost:8000",
   timeout: 10000,
   headers: {
@@ -76,78 +76,6 @@ const handleApiCall = async <T = any>(
 };
 
 /**
- * Download file from API
- * @param url - API endpoint
- * @param filename - Name for downloaded file
- * @returns Download result
- */
-const downloadFile = async (
-  url: string,
-  filename: string
-): Promise<{ success: boolean }> => {
-  try {
-    const fullUrl = `${API_CONFIG.baseURL}${url}`;
-
-    const response = await fetchWithTimeout(fullUrl);
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-
-    const blob = await response.blob();
-    const downloadUrl = window.URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = downloadUrl;
-    link.setAttribute("download", filename);
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    window.URL.revokeObjectURL(downloadUrl);
-
-    return { success: true };
-  } catch (error: any) {
-    throw new Error("Error downloading file");
-  }
-};
-
-/**
- * Upload file to API
- * @param url - API endpoint
- * @param file - File to upload
- * @param fieldName - Form field name (default: 'file')
- * @returns Upload result
- */
-const uploadFile = async <T = any>(
-  url: string,
-  file: File,
-  fieldName: string = "file"
-): Promise<T> => {
-  try {
-    const formData = new FormData();
-    formData.append(fieldName, file);
-
-    const fullUrl = `${API_CONFIG.baseURL}${url}`;
-
-    const response = await fetchWithTimeout(fullUrl, {
-      method: "POST",
-      body: formData,
-      // Don't set Content-Type for FormData, browser will set it with boundary
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      const message = errorData.detail || `HTTP ${response.status}`;
-      throw new Error(message);
-    }
-
-    return await response.json();
-  } catch (error: any) {
-    const message = error.message || "Error uploading file";
-    throw new Error(message);
-  }
-};
-
-/**
  * API client with common HTTP methods
  */
 const apiClient: ApiClient = {
@@ -194,4 +122,4 @@ const apiClient: ApiClient = {
   },
 };
 
-export { apiClient, handleApiCall, downloadFile, uploadFile };
+export { apiClient, handleApiCall };

@@ -9,7 +9,7 @@
 
 import React from "react";
 import { TextField } from "@mui/material";
-import { FieldRendererProps } from "../types";
+import { FieldRendererProps } from "../dynamicFormTypes";
 
 /**
  * Render number field with numeric validation

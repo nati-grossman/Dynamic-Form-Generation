@@ -5,7 +5,7 @@
  * based on dispatched actions.
  */
 
-import { AppState, AppAction } from "@/types/appTypes";
+import { AppState, AppAction } from "@/types/typesExports";
 import { ACTIONS } from "./actions";
 
 // Initial state

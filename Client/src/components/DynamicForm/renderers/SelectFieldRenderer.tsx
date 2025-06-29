@@ -15,7 +15,7 @@ import {
   MenuItem,
   FormHelperText,
 } from "@mui/material";
-import { FieldRendererProps } from "../types";
+import { FieldRendererProps } from "../dynamicFormTypes";
 
 /**
  * Render dropdown/select field with dynamic options

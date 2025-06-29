@@ -9,7 +9,7 @@ A system for creating dynamic forms based on JSON files with advanced validation
 - ✅ Advanced validation with Pydantic v2 and custom error messages
 - ✅ Form storage in PostgreSQL database
 - ✅ Modern UI with Material UI
-- ✅ Full Hebrew and RTL support
+- ✅ Full English support with clean UI
 - ✅ Example file download
 - ✅ Display list of submitted forms
 - ✅ Delete all forms
@@ -21,6 +21,8 @@ A system for creating dynamic forms based on JSON files with advanced validation
 - ✅ Full environment variables support
 - ✅ Comprehensive documentation for each module
 - ✅ CORS and Swagger docs support
+- ✅ Clean client-side architecture with organized types and services
+- ✅ Separated validation logic into focused modules
 
 ## Project Structure
 
@@ -58,12 +60,12 @@ Dynamic Form Generation/
 │   │   ├── form_model_generator.py # Dynamic model generator
 │   │   └── validators/       # Field validation functions
 │   │       ├── __init__.py   # Validators export
-│   │       ├── text_validator.py # Text field validation
-│   │       ├── email_validator.py # Email field validation
-│   │       ├── password_validator.py # Password field validation
-│   │       ├── date_validator.py # Date field validation
-│   │       ├── number_validator.py # Number field validation
-│   │       └── dropdown_validator.py # Dropdown field validation
+│   │       ├── textValidator.py # Text field validation
+│   │       ├── emailValidator.py # Email field validation
+│   │       ├── passwordValidator.py # Password field validation
+│   │       ├── dateValidator.py # Date field validation
+│   │       ├── numberValidator.py # Number field validation
+│   │       └── dropdownValidator.py # Dropdown field validation
 │   │
 │   └── files/                 # System files
 │       ├── example_file/      # Example file
@@ -86,12 +88,15 @@ Dynamic Form Generation/
 │       │
 │       ├── components/       # React components
 │       │   ├── DynamicForm/  # Dynamic form component
-│       │   │   ├── index.tsx # Main form component
+│       │   │   ├── DynamicForm.tsx # Main form component
 │       │   │   ├── fieldRenderer.tsx # Main field renderer
-│       │   │   ├── types.ts  # Specific types
-│       │   │   ├── validation.ts # Validation logic
+│       │   │   ├── dynamicFormTypes.ts # Component-specific types
+│       │   │   ├── validation/ # Validation logic (organized)
+│       │   │   │   ├── fieldValidationBuilder.ts # Individual field validation
+│       │   │   │   ├── schemaBuilder.ts # Complete schema building
+│       │   │   │   └── validationExports.ts # Validation exports
 │       │   │   └── renderers/ # Separate renderers for each field type
-│       │   │       ├── index.ts # Renderers export
+│       │   │       ├── rendererExports.ts # Renderers export
 │       │   │       ├── TextFieldRenderer.tsx
 │       │   │       ├── DateFieldRenderer.tsx
 │       │   │       ├── NumberFieldRenderer.tsx
@@ -101,14 +106,16 @@ Dynamic Form Generation/
 │       │   ├── StatisticsDialog.tsx # Statistics component
 │       │   └── SubmissionsList.tsx # Submissions list component
 │       │
-│       ├── services/         # API services
-│       │   ├── index.ts      # Services export
-│       │   ├── apiService.ts # Basic API service
+│       ├── services/         # API services (organized)
+│       │   ├── serviceExports.ts # Services export
+│       │   ├── apiService.ts # Core API service
 │       │   ├── formService.ts # Forms service
-│       │   └── submissionService.ts # Submissions service
+│       │   ├── submissionService.ts # Submissions service
+│       │   ├── statisticsService.ts # Statistics service
+│       │   └── fileService.ts # File operations service
 │       │
 │       ├── store/            # App state management
-│       │   ├── index.ts      # Store export
+│       │   ├── storeExports.ts # Store export
 │       │   ├── context.tsx   # React Context
 │       │   ├── hooks.ts      # Custom hooks
 │       │   ├── actions.ts    # Store actions
@@ -118,14 +125,19 @@ Dynamic Form Generation/
 │       │   ├── useInitialData.ts # Initial data hook
 │       │   └── useSubmissions.ts # Submissions hook
 │       │
-│       └── types/            # Type definitions
-│           └── index.ts      # Global types
+│       └── types/            # Type definitions (organized)
+│           ├── typesExports.ts # Central types export
+│           ├── apiTypes.ts   # API-related types
+│           ├── formTypes.ts  # Form-related types
+│           ├── submissionTypes.ts # Submission-related types
+│           ├── statisticsTypes.ts # Statistics-related types
+│           └── uiTypes.ts    # UI and component types
 │
 └── Files to upload/          # Example files for upload
     ├── example1.json         # Example 1: Product order form (with dropdown)
-    ├── example2.json         # Example 2: Contact form
+    ├── example2.json         # Example 2: Event registration form
     ├── example3.json         # Example 3: Course registration form
-    └── example4.json         # Example 4: Satisfaction survey
+    └── example4.json         # Example 4: Customer satisfaction survey
 ```
 
 ## Installation and Setup
@@ -277,11 +289,12 @@ Click the "Statistics" button to see detailed statistics about submitted forms.
 
 ### Client
 
-- **React**: UI library
-- **TypeScript**: Type safety
-- **Material UI**: Modern UI components
-- **Formik + Yup**: Form management and validation
-- **Fetch API**: Native HTTP communication with server
+- **React**: UI library with TypeScript
+- **Organized Type System**: Types split into logical modules (API, Form, UI, etc.)
+- **Modular Services**: Separated services for different concerns (API, Forms, Statistics, Files)
+- **Clean Validation Logic**: Validation split into focused builder functions
+- **Material UI**: Modern UI components with responsive design
+- **State Management**: Context-based state with organized actions and reducers
 
 ### Communication
 
@@ -317,14 +330,33 @@ The system supports custom error messages for each field. If no error messages a
 
 ### Client (Frontend)
 
-- **React**: UI library
-- **TypeScript**: Type safety
-- **Material UI**: Modern UI components
-- **Formik + Yup**: Form management and validation
-- **Fetch API**: Native HTTP communication with server
+- **React**: UI library with TypeScript
+- **Organized Type System**: Types split into logical modules (API, Form, UI, etc.)
+- **Modular Services**: Separated services for different concerns (API, Forms, Statistics, Files)
+- **Clean Validation Logic**: Validation split into focused builder functions
+- **Material UI**: Modern UI components with responsive design
+- **State Management**: Context-based state with organized actions and reducers
 
 ### Communication
 
 - **RESTful API**: Structured endpoints
 - **CORS**: Cross-origin access support
 - **JSON**: Standard data format
+
+## Recent Improvements
+
+### Client-Side Architecture Refactoring
+
+- **Types Organization**: Split large type files into focused modules
+- **Service Separation**: Created dedicated services for statistics and file operations
+- **Validation Refactoring**: Split validation logic into individual builder functions
+- **Clean File Naming**: Replaced generic names (index.ts) with descriptive names
+- **Modular Structure**: Improved import/export structure for better maintainability
+
+### Benefits
+
+- **Better Maintainability**: Easier to find and modify specific functionality
+- **Improved Developer Experience**: Clear separation of concerns
+- **Type Safety**: Better TypeScript support with organized type definitions
+- **Code Reusability**: Modular functions can be easily reused
+- **Cleaner Imports**: Descriptive file names make code more readable

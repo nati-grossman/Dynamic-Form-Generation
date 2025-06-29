@@ -1,28 +1,21 @@
 /**
- * Services Index - Centralized exports for all services
+ * Service Exports - Central export for all service modules
  *
- * This file provides convenient imports for all service modules
+ * This file re-exports all services from their respective modules
+ * for easy importing throughout the application.
  */
 
 // API Service
-export {
-  apiClient,
-  handleApiCall,
-  downloadFile,
-  uploadFile,
-} from "./apiService";
+export * from "./apiService";
 
 // Form Service
-export {
-  downloadExample,
-  uploadSchema,
-  getCurrentSchema,
-  submitForm,
-} from "./formService";
+export * from "./formService";
 
 // Submission Service
-export {
-  getSubmissions,
-  deleteAllSubmissions,
-  getStatistics,
-} from "./submissionService";
+export * from "./submissionService";
+
+// Statistics Service
+export * from "./statisticsService";
+
+// File Service
+export * from "./fileService";

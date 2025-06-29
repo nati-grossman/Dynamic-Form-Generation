@@ -28,8 +28,8 @@ import {
   Assessment as AssessmentIcon,
   Description as DescriptionIcon,
 } from "@mui/icons-material";
-import { FormStatistics } from "../types/appTypes";
-import { getStatistics } from "../services/submissionService";
+import { FormStatistics } from "../types/typesExports";
+import { getStatistics } from "../services/statisticsService";
 
 interface StatisticsDialogProps {
   open: boolean;

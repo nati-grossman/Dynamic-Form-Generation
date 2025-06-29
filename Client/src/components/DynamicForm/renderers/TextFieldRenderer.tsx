@@ -10,7 +10,7 @@
 
 import React from "react";
 import { TextField } from "@mui/material";
-import { FieldRendererProps } from "../types";
+import { FieldRendererProps } from "../dynamicFormTypes";
 
 /**
  * Render text, email, password, or tel field

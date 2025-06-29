@@ -2,7 +2,7 @@
  * DynamicForm Types - Type definitions specific to DynamicForm component
  */
 
-import { FormField } from "@/types/appTypes";
+import { FormField } from "@/types/typesExports";
 import { AnySchema } from "yup";
 
 export interface ValidationSchema {

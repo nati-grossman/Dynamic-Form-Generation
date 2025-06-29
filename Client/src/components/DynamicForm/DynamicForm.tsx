@@ -11,8 +11,8 @@ import React, { useState, useEffect } from "react";
 import { Button, Box, Typography, Paper, Grid } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { DynamicFormProps } from "@/types/appTypes";
-import { createValidationSchema } from "./validation";
+import { DynamicFormProps } from "@/types/typesExports";
+import { createValidationSchema } from "./validation/validationExports";
 import { FieldRenderer } from "./fieldRenderer";
 
 const DynamicForm: React.FC<DynamicFormProps> = ({

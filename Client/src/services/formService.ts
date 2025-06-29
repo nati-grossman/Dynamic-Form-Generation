@@ -8,13 +8,9 @@
  * - Submitting form data
  */
 
-import {
-  apiClient,
-  handleApiCall,
-  downloadFile,
-  uploadFile,
-} from "./apiService";
-import { FormSchema, FormSubmissionResponse } from "@/types/appTypes";
+import { apiClient, handleApiCall } from "./apiService";
+import { downloadFile, uploadFile } from "./fileService";
+import { FormSchema, FormSubmissionResponse } from "@/types/typesExports";
 
 /**
  * Download example form JSON file
