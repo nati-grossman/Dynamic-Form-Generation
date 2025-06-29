@@ -46,7 +46,11 @@ const SubmissionsList: React.FC<SubmissionsListProps> = ({
     });
   };
 
-  const renderFieldValue = (value: any) => {
+  const renderFieldValue = (
+    value: any,
+    fieldName?: string,
+    submissionMapping?: any
+  ) => {
     if (value === null || value === undefined || value === "") {
       return (
         <span style={{ color: "#999", fontStyle: "italic" }}>לא הוזן</span>
@@ -58,23 +62,65 @@ const SubmissionsList: React.FC<SubmissionsListProps> = ({
     if (typeof value === "object") {
       return JSON.stringify(value);
     }
+
+    // For dropdown fields, try to get the label from saved submission data first
+    if (fieldName && submissionMapping?.selected_options_labels?.[fieldName]) {
+      const savedLabel = submissionMapping.selected_options_labels[fieldName];
+      if (Array.isArray(savedLabel)) {
+        return savedLabel.join(", "); // Multiple selection
+      }
+      return savedLabel; // Single selection
+    }
+
+    // Fallback: Check current schema for dropdown field labels
+    if (fieldName && schema?.fields) {
+      const field = schema.fields.find((f: any) => f.name === fieldName);
+      if (field && field.type === "dropdown" && field.options) {
+        if (Array.isArray(value)) {
+          // Multiple selection
+          const labels = value.map((v: any) => {
+            const option = field.options?.find((opt: any) => opt.value === v);
+            return option ? option.label : v;
+          });
+          return labels.join(", ");
+        } else {
+          // Single selection
+          const option = field.options?.find((opt: any) => opt.value === value);
+          if (option) {
+            return option.label;
+          }
+        }
+      }
+    }
+
     return String(value);
   };
 
-  const getLabelForField = (
-    name: string,
-    fieldsMapping?: { name: string; label: string }[]
-  ) => {
-    if (fieldsMapping) {
-      const found = fieldsMapping.find((f) => f.name === name);
-      if (found) return found.label;
+  const getLabelForField = (name: string, submissionMapping?: any) => {
+    // Handle new format with nested structure
+    if (submissionMapping?.fields_mapping) {
+      if (submissionMapping.fields_mapping[name]) {
+        return submissionMapping.fields_mapping[name];
+      }
+    }
+    // Handle old format (direct object or array)
+    else if (submissionMapping) {
+      if (Array.isArray(submissionMapping)) {
+        const found = submissionMapping.find((f) => f.name === name);
+        if (found) return found.label;
+      } else if (
+        typeof submissionMapping === "object" &&
+        submissionMapping[name]
+      ) {
+        return submissionMapping[name];
+      }
     }
     return schema?.fields.find((f: any) => f.name === name)?.label || name;
   };
 
   const renderSubmissionData = (
     data: Record<string, any>,
-    fieldsMapping?: { name: string; label: string }[]
+    submissionMapping?: any
   ) => (
     <Grid container spacing={1}>
       {Object.entries(data).map(([key, value]) => (
@@ -85,10 +131,10 @@ const SubmissionsList: React.FC<SubmissionsListProps> = ({
               color="primary"
               sx={{ minWidth: 100 }}
             >
-              {getLabelForField(key, fieldsMapping)}:
+              {getLabelForField(key, submissionMapping)}:
             </Typography>
             <Typography variant="body2" sx={{ ml: 1 }}>
-              {renderFieldValue(value)}
+              {renderFieldValue(value, key, submissionMapping)}
             </Typography>
           </Box>
         </Grid>

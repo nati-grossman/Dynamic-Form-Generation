@@ -8,8 +8,9 @@
  * - Data flow
  */
 
-import React, { useEffect } from "react";
-import { Container, Typography, Grid } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Container, Typography, Grid, Box, Button } from "@mui/material";
+import { Assessment as AssessmentIcon } from "@mui/icons-material";
 
 // Context and Services
 import { AppProvider, useAppContext } from "./store";
@@ -22,11 +23,13 @@ import FileUpload from "./components/FileUpload";
 import DynamicForm from "./components/DynamicForm";
 import SubmissionsList from "./components/SubmissionsList";
 import MessageDisplay from "./components/MessageDisplay";
+import StatisticsDialog from "./components/StatisticsDialog";
 
 // Main App Content
 const AppContent: React.FC = () => {
-  const { schema, loading, setSchema, setLoading, displayMessage } =
-    useAppContext();
+  const { schema, loading, setSchema, displayMessage } = useAppContext();
+
+  const [statisticsOpen, setStatisticsOpen] = useState(false);
 
   const { loadInitialData } = useInitialData();
   const { submissions, refreshSubmissions, handleDeleteAllSubmissions } =
@@ -70,15 +73,31 @@ const AppContent: React.FC = () => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Typography
-        variant="h3"
-        component="h1"
-        gutterBottom
-        align="center"
-        sx={{ mb: 4 }}
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={4}
       >
-        מערכת טפסים דינמית
-      </Typography>
+        <Typography
+          variant="h3"
+          component="h1"
+          gutterBottom
+          align="center"
+          sx={{ flex: 1 }}
+        >
+          מערכת טפסים דינמית
+        </Typography>
+
+        <Button
+          variant="outlined"
+          startIcon={<AssessmentIcon />}
+          onClick={() => setStatisticsOpen(true)}
+          sx={{ minWidth: "auto" }}
+        >
+          סטטיסטיקות
+        </Button>
+      </Box>
 
       {/* File Upload Section */}
       <FileUpload onSchemaUploaded={handleSchemaUploaded} />
@@ -106,6 +125,12 @@ const AppContent: React.FC = () => {
 
       {/* Message Display */}
       <MessageDisplay />
+
+      {/* Statistics Dialog */}
+      <StatisticsDialog
+        open={statisticsOpen}
+        onClose={() => setStatisticsOpen(false)}
+      />
     </Container>
   );
 };

@@ -76,6 +76,25 @@ export interface SubmissionDB {
   form_title: string;
   data: string | Record<string, any>; // JSON string or object
   submitted_at: string;
+  fields_mapping?: { name: string; label: string }[] | Record<string, string>; // Support both old and new formats
+}
+
+// Statistics Types
+export interface FormStatistics {
+  total_submissions: number;
+  total_forms: number;
+  forms: FormStat[];
+}
+
+export interface FormStat {
+  title: string;
+  count: number;
+  fields: FieldStat[];
+}
+
+export interface FieldStat {
+  name: string;
+  label: string;
 }
 
 // UI State Types

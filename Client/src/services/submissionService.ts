@@ -8,7 +8,7 @@
  */
 
 import { apiClient, handleApiCall } from "./apiService";
-import { SubmissionDB, ApiResponse } from "@/types";
+import { SubmissionDB, ApiResponse, FormStatistics } from "@/types";
 
 /**
  * Get all form submissions
@@ -18,6 +18,17 @@ export const getSubmissions = async (): Promise<SubmissionDB[]> => {
   return await handleApiCall<SubmissionDB[]>(
     () => apiClient.get("/submissions/"),
     "שגיאה בקבלת הטפסים שהוגשו"
+  );
+};
+
+/**
+ * Get form submission statistics
+ * @returns Statistics object with form counts and field information
+ */
+export const getStatistics = async (): Promise<FormStatistics> => {
+  return await handleApiCall<FormStatistics>(
+    () => apiClient.get("/submissions/statistics"),
+    "שגיאה בקבלת הסטטיסטיקות"
   );
 };
 

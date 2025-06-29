@@ -127,13 +127,46 @@ class FormService:
                     message="טופס זהה כבר הוגש קודם לכן"
                 )
             
+            # Create fields mapping
+            fields_mapping = {f.name: f.label for f in self.current_form_schema.fields}
+            
+            # Create selected options labels for dropdown fields
+            selected_options_labels = {}
+            submitted_data = validated_data.dict()
+            
+            for field in self.current_form_schema.fields:
+                if field.type == "dropdown" and field.name in submitted_data:
+                    submitted_value = submitted_data[field.name]
+                    
+                    # Find the label for the selected value(s)
+                    if hasattr(field, 'options') and field.options:
+                        if isinstance(submitted_value, list):  # Multiple selection
+                            labels = []
+                            for value in submitted_value:
+                                for option in field.options:
+                                    if option.value == value:
+                                        labels.append(option.label)
+                                        break
+                            selected_options_labels[field.name] = labels
+                        else:  # Single selection
+                            for option in field.options:
+                                if option.value == submitted_value:
+                                    selected_options_labels[field.name] = option.label
+                                    break
+            
+            # Combine fields_mapping with selected_options_labels
+            final_mapping = {
+                "fields_mapping": fields_mapping,
+                "selected_options_labels": selected_options_labels
+            }
+            
             # Save to database
             db_submission = FormSubmissionDB(
                 form_title=self.current_form_schema.title,
-                data=json.dumps(validated_data.dict()),
+                data=json.dumps(submitted_data),
                 submitted_at=datetime.now().isoformat(),
-                data_hash=generate_data_hash(validated_data.dict()),
-                fields_mapping=[{"name": f.name, "label": f.label} for f in self.current_form_schema.fields]
+                data_hash=generate_data_hash(submitted_data),
+                fields_mapping=final_mapping
             )
             db.add(db_submission)
             db.commit()

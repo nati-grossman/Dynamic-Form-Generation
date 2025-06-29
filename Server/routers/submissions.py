@@ -30,6 +30,14 @@ def get_submissions(db: Session = Depends(get_db)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"שגיאה בקבלת הטפסים: {str(e)}")
 
+@router.get("/statistics")
+def get_statistics(db: Session = Depends(get_db)):
+    """Get form submission statistics"""
+    try:
+        return submission_service.get_statistics(db)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"שגיאה בקבלת הסטטיסטיקות: {str(e)}")
+
 @router.delete("/")
 def delete_all_submissions(db: Session = Depends(get_db)):
     """Delete all form submissions"""

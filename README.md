@@ -55,11 +55,8 @@ Dynamic Form Generation/
 │   │   └── dynamic_validator.py # מחולל מודלים דינמיים
 │   │
 │   └── files/                 # קבצי מערכת
-│       ├── example_file/      # קבצי דוגמה
-│       │   ├── example1.json  # קובץ דוגמה 1: טופס רישום בסיסי
-│       │   ├── example2.json  # קובץ דוגמה 2: טופס יצירת קשר
-│       │   ├── example3.json  # קובץ דוגמה 3: טופס רישום לקורס
-│       │   └── example4.json  # קובץ דוגמה 4: סקר שביעות רצון
+│       ├── example_file/      # קובץ דוגמה
+│       │   └── example1.json  # קובץ דוגמה להורדה למשתמש
 │       └── user_file/         # קבצי משתמש
 │           └── current_form.json # הסכמה הנוכחית
 │
@@ -109,7 +106,7 @@ Dynamic Form Generation/
 │           └── index.ts      # טיפוסים גלובליים
 │
 └── Files to upload/          # קבצי דוגמה להעלאה
-    ├── example1.json         # דוגמה 1: טופס רישום בסיסי
+    ├── example1.json         # דוגמה 1: טופס הזמנת מוצרים (עם dropdown)
     ├── example2.json         # דוגמה 2: טופס יצירת קשר
     ├── example3.json         # דוגמה 3: טופס רישום לקורס
     └── example4.json         # דוגמה 4: סקר שביעות רצון
