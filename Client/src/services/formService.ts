@@ -14,7 +14,7 @@ import {
   downloadFile,
   uploadFile,
 } from "./apiService";
-import { FormSchema, FormSubmissionResponse } from "@/types";
+import { FormSchema, FormSubmissionResponse } from "@/types/appTypes";
 
 /**
  * Download example form JSON file

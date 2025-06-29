@@ -8,7 +8,7 @@
  */
 
 import { apiClient, handleApiCall } from "./apiService";
-import { SubmissionDB, ApiResponse, FormStatistics } from "@/types";
+import { SubmissionDB, ApiResponse, FormStatistics } from "@/types/appTypes";
 
 /**
  * Get all form submissions
@@ -27,7 +27,7 @@ export const getSubmissions = async (): Promise<SubmissionDB[]> => {
  */
 export const getStatistics = async (): Promise<FormStatistics> => {
   return await handleApiCall<FormStatistics>(
-    () => apiClient.get("/submissions/statistics"),
+    () => apiClient.get("/statistics"),
     "Error getting statistics"
   );
 };
@@ -40,31 +40,5 @@ export const deleteAllSubmissions = async (): Promise<ApiResponse> => {
   return await handleApiCall<ApiResponse>(
     () => apiClient.delete("/submissions/"),
     "Error deleting forms"
-  );
-};
-
-/**
- * Get submission by ID (for future use)
- * @param id - Submission ID
- * @returns Submission object
- */
-export const getSubmissionById = async (id: string): Promise<SubmissionDB> => {
-  return await handleApiCall<SubmissionDB>(
-    () => apiClient.get(`/submissions/${id}`),
-    "Error getting form"
-  );
-};
-
-/**
- * Delete submission by ID (for future use)
- * @param id - Submission ID
- * @returns Deletion result
- */
-export const deleteSubmissionById = async (
-  id: string
-): Promise<ApiResponse> => {
-  return await handleApiCall<ApiResponse>(
-    () => apiClient.delete(`/submissions/${id}`),
-    "Error deleting form"
   );
 };

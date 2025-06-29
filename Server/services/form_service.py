@@ -73,12 +73,7 @@ class FormService:
         """Get current form schema (always from file)"""
         return self.load_schema_from_file()
     
-    def get_current_form_id(self) -> str:
-        """Get current form ID"""
-        if self.current_form_id is None:
-            raise HTTPException(status_code=404, detail="No form loaded")
-        
-        return self.current_form_id
+
     
     def load_schema_from_file(self) -> dict:
         """Load schema from saved file"""

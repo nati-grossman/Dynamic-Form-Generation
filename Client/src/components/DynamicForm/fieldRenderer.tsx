@@ -12,7 +12,7 @@ import {
   DateFieldRenderer,
   NumberFieldRenderer,
   SelectFieldRenderer,
-} from "./renderers";
+} from "./renderers/rendererExports";
 
 /**
  * Main field renderer component

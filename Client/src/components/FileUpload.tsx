@@ -21,7 +21,7 @@ import {
   Upload as UploadIcon,
 } from "@mui/icons-material";
 
-import { useAppContext } from "../store";
+import { useAppContext } from "../store/storeExports";
 import { downloadExample, uploadSchema } from "../services/formService";
 
 interface FileUploadProps {

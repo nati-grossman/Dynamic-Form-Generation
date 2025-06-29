@@ -6,7 +6,7 @@
  * centralized configuration using native fetch API.
  */
 
-import { ApiClient } from "@/types";
+import { ApiClient } from "@/types/appTypes";
 
 // API Configuration
 const API_CONFIG = {

@@ -24,6 +24,5 @@ export {
 export {
   getSubmissions,
   deleteAllSubmissions,
-  getSubmissionById,
-  deleteSubmissionById,
+  getStatistics,
 } from "./submissionService";

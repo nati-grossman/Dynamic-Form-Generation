@@ -5,7 +5,7 @@
  * to update the application state.
  */
 
-import { FormSchema, SubmissionDB, MessageType } from "@/types";
+import { FormSchema, SubmissionDB, MessageType } from "@/types/appTypes";
 
 // Action types
 export const ACTIONS = {

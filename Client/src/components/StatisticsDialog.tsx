@@ -28,7 +28,7 @@ import {
   Assessment as AssessmentIcon,
   Description as DescriptionIcon,
 } from "@mui/icons-material";
-import { FormStatistics } from "../types";
+import { FormStatistics } from "../types/appTypes";
 import { getStatistics } from "../services/submissionService";
 
 interface StatisticsDialogProps {

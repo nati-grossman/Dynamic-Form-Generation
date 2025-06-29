@@ -23,8 +23,8 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { SubmissionsListProps } from "../types";
-import { useAppContext } from "../store";
+import { SubmissionsListProps } from "../types/appTypes";
+import { useAppContext } from "../store/storeExports";
 
 const SubmissionsList: React.FC<SubmissionsListProps> = ({
   submissions,

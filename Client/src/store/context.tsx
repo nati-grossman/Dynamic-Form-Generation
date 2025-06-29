@@ -11,7 +11,7 @@ import React, {
   useCallback,
   ReactNode,
 } from "react";
-import { FormSchema, SubmissionDB, MessageType } from "@/types";
+import { FormSchema, SubmissionDB, MessageType } from "@/types/appTypes";
 import { initialState, appReducer } from "./reducer";
 import * as actions from "./actions";
 

@@ -3,7 +3,7 @@
  */
 
 import { useCallback } from "react";
-import { useAppContext } from "../store";
+import { useAppContext } from "../store/storeExports";
 import { getCurrentSchema } from "../services/formService";
 
 export const useInitialData = () => {

@@ -14,8 +14,10 @@ A system for creating dynamic forms based on JSON files with advanced validation
 - ✅ Display list of submitted forms
 - ✅ Delete all forms
 - ✅ Modular architecture with separate routers and services
-- ✅ Pydantic models split into separate files
+- ✅ Pydantic models split into separate files with focused validators
 - ✅ Dynamic model generator for runtime validation
+- ✅ Dedicated statistics service and controller
+- ✅ Individual validator functions for each field type
 - ✅ Full environment variables support
 - ✅ Comprehensive documentation for each module
 - ✅ CORS and Swagger docs support
@@ -38,20 +40,30 @@ Dynamic Form Generation/
 │   │
 │   ├── routers/               # Controllers (API Routes)
 │   │   ├── forms.py          # Forms controller
-│   │   └── submissions.py    # Submissions controller
+│   │   ├── submissions.py    # Submissions controller
+│   │   └── statistics.py     # Statistics controller
 │   │
 │   ├── services/              # Service layer
 │   │   ├── __init__.py       # Services export
 │   │   ├── form_service.py   # Forms service
-│   │   └── submission_service.py # Submissions service
+│   │   ├── submission_service.py # Submissions service
+│   │   └── statistics_service.py # Statistics service
 │   │
 │   ├── models/                # Split Pydantic models
 │   │   ├── __init__.py       # Export all models
-│   │   ├── base.py           # Base models
+│   │   ├── field_models.py   # Base field models
 │   │   ├── form_field.py     # Form field model
 │   │   ├── form_schema.py    # Form schema model
 │   │   ├── submission.py     # Submission model
-│   │   └── dynamic_validator.py # Dynamic model generator
+│   │   ├── form_model_generator.py # Dynamic model generator
+│   │   └── validators/       # Field validation functions
+│   │       ├── __init__.py   # Validators export
+│   │       ├── text_validator.py # Text field validation
+│   │       ├── email_validator.py # Email field validation
+│   │       ├── password_validator.py # Password field validation
+│   │       ├── date_validator.py # Date field validation
+│   │       ├── number_validator.py # Number field validation
+│   │       └── dropdown_validator.py # Dropdown field validation
 │   │
 │   └── files/                 # System files
 │       ├── example_file/      # Example file
@@ -246,8 +258,11 @@ Click the "Statistics" button to see detailed statistics about submitted forms.
 ### Submissions (`/submissions`)
 
 - `GET /submissions/` - Get all submitted forms
-- `GET /submissions/statistics` - Get submission statistics
 - `DELETE /submissions/` - Delete all forms
+
+### Statistics (`/statistics`)
+
+- `GET /statistics` - Get submission statistics
 
 ## Technologies
 

@@ -8,7 +8,7 @@
  */
 
 import * as yup from "yup";
-import { FormField } from "@/types";
+import { FormField } from "@/types/appTypes";
 import { ValidationSchema } from "./types";
 
 /**

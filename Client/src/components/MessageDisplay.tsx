@@ -9,7 +9,7 @@
 
 import React, { useEffect } from "react";
 import { Snackbar, Alert } from "@mui/material";
-import { useAppContext } from "../store";
+import { useAppContext } from "../store/storeExports";
 
 const MessageDisplay: React.FC = () => {
   const { message, messageType, showMessage, hideMessage } = useAppContext();

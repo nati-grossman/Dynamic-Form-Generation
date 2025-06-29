@@ -1,5 +1,5 @@
 {
-  "title": "Course Registration",
+  "title": "Event Registration Form",
   "fields": [
     {
       "name": "fullName",
@@ -9,24 +9,55 @@
       "validation": {
         "minLength": 2,
         "maxLength": 50
+      },
+      "errorMessages": {
+        "required": "Please enter your full name",
+        "minLength": "Name is too short (at least 2 characters)",
+        "maxLength": "Name is too long (maximum 50 characters)"
       }
     },
     {
       "name": "email",
-      "label": "Email Address",
+      "label": "Contact Email",
       "type": "email",
-      "required": true
+      "required": true,
+      "validation": {
+        "email": true
+      },
+      "errorMessages": {
+        "required": "Please enter email address",
+        "email": "Email format is invalid"
+      }
     },
     {
-      "name": "experience",
-      "label": "Experience Level",
-      "type": "dropdown",
+      "name": "eventDate",
+      "label": "Event Date",
+      "type": "date",
       "required": true,
+      "validation": {
+        "minDate": "2024-01-01",
+        "maxDate": "2026-12-31"
+      },
+      "errorMessages": {
+        "required": "Please enter date",
+        "minDate": "Date is too early",
+        "maxDate": "Date is too late"
+      }
+    },
+    {
+      "name": "eventType",
+      "label": "Event Type",
+      "type": "dropdown",
+      "required": false,
       "options": [
-        { "value": "beginner", "label": "Beginner" },
-        { "value": "intermediate", "label": "Intermediate" },
-        { "value": "advanced", "label": "Advanced" }
-      ]
+        { "value": "conference", "label": "Conference" },
+        { "value": "workshop", "label": "Workshop" },
+        { "value": "webinar", "label": "Webinar" },
+        { "value": "other", "label": "Other" }
+      ],
+      "errorMessages": {
+        "invalidOption": "The event type you selected is invalid"
+      }
     }
   ]
 }

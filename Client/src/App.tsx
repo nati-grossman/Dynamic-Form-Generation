@@ -13,7 +13,7 @@ import { Container, Typography, Grid, Box, Button } from "@mui/material";
 import { Assessment as AssessmentIcon } from "@mui/icons-material";
 
 // Context and Services
-import { AppProvider, useAppContext } from "./store";
+import { AppProvider, useAppContext } from "./store/storeExports";
 import { submitForm } from "./services/formService";
 import { useInitialData } from "./hooks/useInitialData";
 import { useSubmissions } from "./hooks/useSubmissions";

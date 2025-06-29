@@ -32,15 +32,7 @@ def get_current_schema():
     """Get current form schema"""
     return form_service.get_current_schema()
 
-@router.get("/load-schema")
-def load_schema():
-    """Load form schema from saved file"""
-    return form_service.load_schema_from_file()
 
-@router.get("/current-form-id")
-def get_current_form_id():
-    """Get current form ID"""
-    return {"form_id": form_service.get_current_form_id()}
 
 @router.post("/submit")
 def submit_form(submission: FormSubmission, db: Session = Depends(get_db)):

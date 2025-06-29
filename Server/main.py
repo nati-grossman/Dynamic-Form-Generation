@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from config import ALLOWED_ORIGINS, HOST, PORT, DEBUG
-from routers import forms, submissions
+from routers import forms, submissions, statistics
 from database import create_tables
 
 @asynccontextmanager
@@ -41,6 +41,7 @@ app.add_middleware(
 # Include routers
 app.include_router(forms.router)
 app.include_router(submissions.router)
+app.include_router(statistics.router)
 
 @app.get("/")
 def read_root():

@@ -8,7 +8,7 @@ in a dynamic form with its validation rules and error messages.
 from pydantic import BaseModel, field_validator
 from typing import List, Optional
 
-from .base import FieldValidation, FieldErrorMessages, DropdownOption
+from .field_models import FieldValidation, FieldErrorMessages, DropdownOption
 
 class FormField(BaseModel):
     """
