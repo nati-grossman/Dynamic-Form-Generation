@@ -16,7 +16,7 @@
 - ✅ ארכיטקטורה מודולרית עם routers ו-services נפרדים
 - ✅ מודלים Pydantic מפוצלים לקבצים נפרדים
 - ✅ מחולל מודלים דינמיים לוולידציה בזמן ריצה
-- ✅ טסטים מקיפים עם Pytest
+
 - ✅ תמיכה מלאה במשתני סביבה
 - ✅ דוקומנטציה מפורטת לכל מודול
 - ✅ תמיכה ב-CORS ו-Swagger docs
@@ -36,7 +36,6 @@ Dynamic Form Generation/
 │   ├── models.py              # נקודת כניסה למודלים Pydantic
 │   ├── database.py            # הגדרות מסד נתונים
 │   ├── requirements.txt       # תלויות Python
-│   ├── pytest.ini            # הגדרות טסטים
 │   │
 │   ├── routers/               # קונטולרים (API Routes)
 │   │   ├── forms.py          # קונטולר טפסים
@@ -55,15 +54,14 @@ Dynamic Form Generation/
 │   │   ├── submission.py     # מודל הגשה
 │   │   └── dynamic_validator.py # מחולל מודלים דינמיים
 │   │
-│   ├── files/                 # קבצי מערכת
-│   │   ├── example_file/      # קבצי דוגמה
-│   │   │   └── example1.json  # קובץ דוגמה להורדה
-│   │   └── user_file/         # קבצי משתמש
-│   │       └── current_form.json # הסכמה הנוכחית
-│   │
-│   └── tests/                 # טסטים
-│       ├── test_pydantic_validation.py # בדיקות וולידציה
-│       └── test_submissions.py # בדיקות הגשות
+│   └── files/                 # קבצי מערכת
+│       ├── example_file/      # קבצי דוגמה
+│       │   ├── example1.json  # קובץ דוגמה 1: טופס רישום בסיסי
+│       │   ├── example2.json  # קובץ דוגמה 2: טופס יצירת קשר
+│       │   ├── example3.json  # קובץ דוגמה 3: טופס רישום לקורס
+│       │   └── example4.json  # קובץ דוגמה 4: סקר שביעות רצון
+│       └── user_file/         # קבצי משתמש
+│           └── current_form.json # הסכמה הנוכחית
 │
 ├── Client/                    # אפליקציית React עם TypeScript
 │   ├── package.json          # תלויות Node.js
@@ -157,9 +155,6 @@ ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
 ```bash
 cd Server
 pip install -r requirements.txt
-
-# הרצת טסטים (אופציונלי)
-pytest
 
 # הפעלת השרת
 python main.py
@@ -286,16 +281,6 @@ npm start
 ## הודעות שגיאה
 
 המערכת תומכת בהודעות שגיאה מותאמות אישית לכל שדה. אם לא מוגדרות הודעות שגיאה, המערכת תשתמש בהודעות ברירת מחדל בעברית.
-
-## הרצת טסטים
-
-```bash
-cd Server
-pytest                    # הרצת כל הטסטים
-pytest -v                # הרצה מפורטת
-pytest tests/test_pydantic_validation.py  # הרצת טסטים ספציפיים
-pytest tests/test_pydantic_validation.py::TestPydanticValidation::test_text_field_validation  # הרצת טסט ספציפי
-```
 
 ## ארכיטקטורת המערכת
 
